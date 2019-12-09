@@ -50,26 +50,30 @@
     <div class="row">
       <div class="col-lg-12 text-center">
         <h1 class="mt-5">Tattoo studio</h1>
-        <p class="lead">Complete with pre-defined file paths, responsive navigation and example of how to pass data to HTML template!</p>
         <ul class="list-unstyled">
           <li>Tattoo</li>
           <li>Piercing</li>
         </ul>
       </div>
     </div>
-    <img src="http://gotham-news.com/wp-content/uploads/2018/08/tattoo-shop-artist.jpg" width="100%"/>
-	<div class="row">
-	<div class="col-lg-12 myCustomStyle"> This is div styled with custom style! 
-  </div>
-  </div>
+    <img src="http://gotham-news.com/wp-content/uploads/2018/08/tattoo-shop-artist.jpg" width="100%" class="image"/>
+	
 	<div class="row">
             <div class="jumbotron">
-            <h2>Welcome from "{{data["developer_name"]}}"</h2>
+            <h2>Welcome from </h2>
                 <p>Naše boje za tetoviranje su jake i postojane, dermatološki ispitane te su trenutno najpouzdanije boje za tetoviranje dostupne na tržištu. Stoga, osim tetovaže i piercinga, nudimo vam i lasersko uklanjanje tetovaže.
 
                   U našem studiju uz kvalitetan rad dobijete i vrhunski ugođaj pri samom tetoviranju uz koji možete potpuno zaboraviti na bol: jako udobna tattoo stolica, besplatan wi fi, tv, playstation 4 itd.  Konačno i ono najvažnije: sama djelatnost tetoviranja/piercinga zahtijeva visoke higijenske uvjete koje Tattoo studio strogo provodi i na kojima inzistira zbog zaštite klijenta i održavanja struke na profesionalnoj razini.</p>
             </div>
         </div>
+  <div class="newsletter">
+    <h2>Subscribe</h2>
+    <p>Subscribe to our newsletter</p>
+    <input type="text" placeholder="Enter your E-mail">
+  </div>
+  <div class="button">
+    <button class="subBtn">Subscribe</button>
+  </div>
         <!--./row-->
         <div class="row">
             <hr>
