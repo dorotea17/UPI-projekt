@@ -11,15 +11,19 @@ body{
 
 .jumbotron{
 	color: black;
-	margin-top: 10px;
+	margin: 15px;
+	padding: 25px;
 }
 
 .newsletter{
 	width: 100%;
+	padding-top: 10px;
 }
 
 .newsletter input{
 	width: 30%;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 
 .button{

@@ -26,13 +26,14 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="#">Početna
-              <span class="sr-only">(current)</span>
             </a>
           </li>
-          <li class="nav-item" id="onama">
-            <a class="nav-link" href="onama.tpl">O nama</a>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">O nama
+              <span class="sr-only">(current)</span>
+            </a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -55,39 +56,21 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h1 class="mt-5">Tattoo studio</h1>
-        <ul class="list-unstyled">
-          <li>Tattoo</li>
-          <li>Piercing</li>
-        </ul>
+        <h1 class="mt-5">Tattoo studio 2</h1>
+
       </div>
     </div>
-    <img src="http://gotham-news.com/wp-content/uploads/2018/08/tattoo-shop-artist.jpg" width="100%" margin="0px" class="image"/>
-	
-	<div class="row">
-            <div class="jumbotron">
-            <h2>Welcome</h2>
-                <p>Naše boje za tetoviranje su jake i postojane, dermatološki ispitane te su trenutno najpouzdanije boje za tetoviranje dostupne na tržištu. Stoga, osim tetovaže i piercinga, nudimo vam i lasersko uklanjanje tetovaže.
+    <div class="row">
+      <div class="jumbotron">
+      <p>Majstori tetoviranja se ne rađaju, oni se stvaraju, ne nameću se, njih primijetite. Naći ćete ih tamo gdje je ego odbačen i zamjenjen strpljivošću zanatlija koji crpe energiju iz umjetnosti. Tetoviranje je zahtjevan posao, koji da bi hranio nekoga treba biti hranjen dugi niz godina. Zanemari li ga se na trenutak, tetoviranje će jednostavno napustiti onoga tko misli da njime vlada.</p>
+      <img src="https://hellosehat.com/wp-content/uploads/2018/01/Apa-yang-Terjadi-pada-Tinta-Tato-Setelah-Masuk-kedalam-Kulit-Anda-1000x400.jpg" width="100%" margin="0px" class="image"/>
+      <p>Tattoo studio utemeljen u siječnju 2019. godine u Splitu. Naša primarna djelatnost je od samog početka bila tetoviranje inspirirano tematikom J.R.R. Tolkienove književnosti i Tolkienu srodnom tematikom poput anglo-saksoneke, keltske i nordijske mitologije i ikonografije, a ujedno i širim SF i fantasy svijetom predstavljenim kroz književnost, film, slikarstvo, glazbu, te tradicionalnom ikonografijom hrvatske povijesti i povijesti naroda sjevera i zapada Evrope. Više smo se razvijali kao stilski prepoznatljiv brand nego kao institucija, orijentirani klijenteli koja preferira unikatni dizajn (custom tattoo), stoga smo se prilagodili njima u ispunjavanju njihovih želja tako da ćete u našem tattoo studiu uz malo objašnjenja dobiti dizajn za tetoviranje, tetovažu, koja ja osmišljena Vašom idejom i našom maštom. Također kao i većina drugih tattoo studia nudimo i velik izbor kataloških dizajna.
 
-                  U našem studiju uz kvalitetan rad dobijete i vrhunski ugođaj pri samom tetoviranju uz koji možete potpuno zaboraviti na bol: jako udobna tattoo stolica, besplatan wi fi, tv, playstation 4 itd.  Konačno i ono najvažnije: sama djelatnost tetoviranja/piercinga zahtijeva visoke higijenske uvjete koje Tattoo studio strogo provodi i na kojima inzistira zbog zaštite klijenta i održavanja struke na profesionalnoj razini.</p>
-            </div>
-        </div>
-  <div class="newsletter">
-    <h2>Subscribe</h2>
-    <p>Subscribe to our newsletter</p>
-    <input type="text" placeholder="Enter your E-mail">
+        Sama djelatnost tetoviranja zahtjeva visoke higijenske uvjete koje GANDALF TATTOO strogo provodi i nameće u svrhu zaštite klijenata i održavanja struke na profesionalnom nivou. Svakodnevno primjenjujemo bolničku sterilizaciju i dezinfekciju, zaštitu od kontaminacije alata i radnog prostora, a također smo pod redovnom kontrolom Hrvatskog Zavoda za Javno Zdravstvo i Sanitarne Inspekcije. Oprema za tetoviranje kojom radimo je selektivno birana a boje za tetoviranje koje koristimo su odobrene od Hrvatskog Zavoda za Javno Zdravstvo.</p>
+      </div>
   </div>
-  <div class="button">
-    <button class="subBtn">Subscribe</button>
-  </div>
-        <!--./row-->
-        <div class="row">
-            <hr>
-            <footer>
-              <br>
-                <p>&copy; 2019 {{data["developer_organization"]}}.</p>
-            </footer>           
-        </div>
+       
+    </div>
   </div>
   
 	<script>
