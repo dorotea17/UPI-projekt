@@ -26,13 +26,13 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="/">Početna
-              <span class="sr-only">(current)</span>
             </a>
           </li>
-          <li class="nav-item" id="about">
-            <a class="nav-link" href="/about">O nama</a>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">O nama
+            </a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -43,8 +43,10 @@
               <a class="dropdown-item" href="#">Piercing</a>
             </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/contact">Kontakt</a>
+          <li class="nav-item active">
+            <a class="nav-link" href="/contact">Kontakt
+                <span class="sr-only">(current)</span>
+            </a>
           </li>
         </ul>
       </div>
@@ -55,41 +57,41 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h1 class="mt-5">Tattoo studio</h1>
-        <ul class="list-unstyled">
-          <li>Tattoo</li>
-          <li>Piercing</li>
-        </ul>
-      </div>
-    </div>
-    <img src="http://gotham-news.com/wp-content/uploads/2018/08/tattoo-shop-artist.jpg" width="100%" margin="0px" class="image"/>
-	
-	<div class="row">
-            <div class="jumbotron">
-            <h2>Welcome</h2>
-                <p>Naše boje za tetoviranje su jake i postojane, dermatološki ispitane te su trenutno najpouzdanije boje za tetoviranje dostupne na tržištu. Stoga, osim tetovaže i piercinga, nudimo vam i lasersko uklanjanje tetovaže.
-
-                  U našem studiju uz kvalitetan rad dobijete i vrhunski ugođaj pri samom tetoviranju uz koji možete potpuno zaboraviti na bol: jako udobna tattoo stolica, besplatan wi fi, tv, playstation 4 itd.  Konačno i ono najvažnije: sama djelatnost tetoviranja/piercinga zahtijeva visoke higijenske uvjete koje Tattoo studio strogo provodi i na kojima inzistira zbog zaštite klijenta i održavanja struke na profesionalnoj razini.</p>
-            </div>
-        </div>
-  <div class="newsletter">
-    <h2>Subscribe</h2>
-    <p>Subscribe to our newsletter</p>
-    <input type="text" placeholder="Enter your E-mail">
-  </div>
-  <div class="button">
-    <button class="subBtn">Subscribe</button>
-  </div>
-        <!--./row-->
+        <h1 class="mt-5">Kontakt</h1>
         <div class="row">
-            <hr>
-            <footer>
-              <br>
-                <p>&copy; 2019 {{data["developer_organization"]}}.</p>
-            </footer>           
+            <div class="column text-center">          
+                <h3>Tattoo studio</h3>
+                <p>
+                    Ruđera Boškovića 33,<br>
+                    21 000, Split<br>
+                    <br>
+                    Telefon: 0958138526<br>
+                             0977235099<br>
+                     <br>       
+                    E-mail: ikonta@pmfst.hr<br>
+                            dbertovic@pmfst.hr<br>
+                            <br>
+                    Radno vrijeme:<br>
+                    Ponedjeljak – Subota 13h – 20h<br>
+                    Nedjeljom i praznikom od ne radimo
+                          
+    
+                </p></div>
+            <div class="column">
+                
+        <div class="mapouter">
+            <div class="gmap_canvas">
+                <iframe width="500" height="600" id="gmap_canvas" src="https://maps.google.com/maps?q=ru%C4%91era%20bo%C5%A1kovi%C4%87a%2033&t=&z=17&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+                </iframe>
+                <a href="https://www.embedgooglemap.net/blog/nordvpn-coupon-code/"></a>
+            </div>
+            <style>.mapouter{position:relative;text-align:right;height:700px;width:600px;}.gmap_canvas {overflow:hidden;background:none!important;height:700px;width:600px;}</style>
         </div>
+            </div>
+          </div>
+    </div>
+
   </div>
-  
 	<script>
 		//example of calling custom function
 		helloWorld();

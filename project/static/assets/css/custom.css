@@ -6,13 +6,13 @@
 
 body{
 	background-color: #000000;
-	color: #ffffff;
+	color: #ffffff;	
 }
 
 .jumbotron{
 	color: black;
 	margin: 15px;
-	padding: 25px;
+	padding: 20px;
 }
 
 .newsletter{
@@ -40,4 +40,17 @@ body{
 	font-size: 16px;
 	background-color: grey;  
 	outline: none;
+}
+
+.column
+{
+	column-gap: 20px;
+	column-fill: balance;
+	-ms-grid-column-align: center;
+	width: 40%;
+	height: 70%;
+	table-layout: fixed;
+	text-align: center;
+	padding-top: 80px;
+	justify-content: center;
 }

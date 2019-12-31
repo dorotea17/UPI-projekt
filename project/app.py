@@ -23,6 +23,10 @@ def send_js(filename):
 @app.route('/static/<filename:re:.*\.js.map>')
 def send_jsmap(filename):
     return static_file(filename, root=dirname+'/static/assets/js')
+    
+@app.route('/views/<filename:re:.*\.about.tpl>')
+def onama(filename):
+    return static_file(filename, root = dirname + '/views/')
 
 
 
@@ -32,4 +36,13 @@ def index():
             "developer_organization": "PMF"}
     return template('index', data = data)
 
+@app.route('/about')
+def about():
+    return template('about')
+    
+@app.route('/contact')
+def contact():
+    return template('contact')
+   
+    
 run(app, host='localhost', port = 4040)

@@ -20,18 +20,18 @@
 	  <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-      <a class="navbar-brand" href="#">My UPI project</a>
+      <a class="navbar-brand" href="/">My UPI project</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Početna
+            <a class="nav-link" href="/">Početna
             </a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#">O nama
+            <a class="nav-link" href="/about">O nama
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -45,7 +45,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Kontakt</a>
+            <a class="nav-link" href="/contact">Kontakt</a>
           </li>
         </ul>
       </div>
@@ -56,23 +56,22 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h1 class="mt-5">Tattoo studio 2</h1>
+        <h1 class="mt-5">O nama</h1>
 
       </div>
     </div>
-    <div class="row">
-      <div class="jumbotron">
-      <p>Majstori tetoviranja se ne rađaju, oni se stvaraju, ne nameću se, njih primijetite. Naći ćete ih tamo gdje je ego odbačen i zamjenjen strpljivošću zanatlija koji crpe energiju iz umjetnosti. Tetoviranje je zahtjevan posao, koji da bi hranio nekoga treba biti hranjen dugi niz godina. Zanemari li ga se na trenutak, tetoviranje će jednostavno napustiti onoga tko misli da njime vlada.</p>
+    <p>
+      <br>
+        Majstori tetoviranja se ne rađaju, oni se stvaraju, ne nameću se, njih primijetite. Naći ćete ih tamo gdje je ego odbačen i zamjenjen strpljivošću zanatlija koji crpe energiju iz umjetnosti. Tetoviranje je zahtjevan posao, koji da bi hranio nekoga treba biti hranjen dugi niz godina. Zanemari li ga se na trenutak, tetoviranje će jednostavno napustiti onoga tko misli da njime vlada.</p>
       <img src="https://hellosehat.com/wp-content/uploads/2018/01/Apa-yang-Terjadi-pada-Tinta-Tato-Setelah-Masuk-kedalam-Kulit-Anda-1000x400.jpg" width="100%" margin="0px" class="image"/>
-      <p>Tattoo studio utemeljen u siječnju 2019. godine u Splitu. Naša primarna djelatnost je od samog početka bila tetoviranje inspirirano tematikom J.R.R. Tolkienove književnosti i Tolkienu srodnom tematikom poput anglo-saksoneke, keltske i nordijske mitologije i ikonografije, a ujedno i širim SF i fantasy svijetom predstavljenim kroz književnost, film, slikarstvo, glazbu, te tradicionalnom ikonografijom hrvatske povijesti i povijesti naroda sjevera i zapada Evrope. Više smo se razvijali kao stilski prepoznatljiv brand nego kao institucija, orijentirani klijenteli koja preferira unikatni dizajn (custom tattoo), stoga smo se prilagodili njima u ispunjavanju njihovih želja tako da ćete u našem tattoo studiu uz malo objašnjenja dobiti dizajn za tetoviranje, tetovažu, koja ja osmišljena Vašom idejom i našom maštom. Također kao i većina drugih tattoo studia nudimo i velik izbor kataloških dizajna.
+      <div class="row">
+        <div class="jumbotron">
+        <p>Tattoo studio utemeljen u siječnju 2019. godine u Splitu. Naša primarna djelatnost je od samog početka bila tetoviranje inspirirano tematikom J.R.R. Tolkienove književnosti i Tolkienu srodnom tematikom poput anglo-saksoneke, keltske i nordijske mitologije i ikonografije, a ujedno i širim SF i fantasy svijetom predstavljenim kroz književnost, film, slikarstvo, glazbu, te tradicionalnom ikonografijom hrvatske povijesti i povijesti naroda sjevera i zapada Evrope. Više smo se razvijali kao stilski prepoznatljiv brand nego kao institucija, orijentirani klijenteli koja preferira unikatni dizajn, stoga smo se prilagodili njima u ispunjavanju njihovih želja tako da ćete u našem tattoo studiu uz malo objašnjenja dobiti dizajn za tetoviranje, tetovažu, koja ja osmišljena Vašom idejom i našom maštom. Također kao i većina drugih tattoo studia nudimo i velik izbor kataloških dizajna.
 
-        Sama djelatnost tetoviranja zahtjeva visoke higijenske uvjete koje GANDALF TATTOO strogo provodi i nameće u svrhu zaštite klijenata i održavanja struke na profesionalnom nivou. Svakodnevno primjenjujemo bolničku sterilizaciju i dezinfekciju, zaštitu od kontaminacije alata i radnog prostora, a također smo pod redovnom kontrolom Hrvatskog Zavoda za Javno Zdravstvo i Sanitarne Inspekcije. Oprema za tetoviranje kojom radimo je selektivno birana a boje za tetoviranje koje koristimo su odobrene od Hrvatskog Zavoda za Javno Zdravstvo.</p>
+          Sama djelatnost tetoviranja zahtjeva visoke higijenske uvjete koje strogo provodimo i namećemo u svrhu zaštite klijenata i održavanja struke na profesionalnom nivou. Svakodnevno primjenjujemo bolničku sterilizaciju i dezinfekciju, zaštitu od kontaminacije alata i radnog prostora, a također smo pod redovnom kontrolom Hrvatskog Zavoda za Javno Zdravstvo i Sanitarne Inspekcije. Oprema za tetoviranje kojom radimo je selektivno birana a boje za tetoviranje koje koristimo su odobrene od Hrvatskog Zavoda za Javno Zdravstvo.</p>
+        </div>
       </div>
   </div>
-       
-    </div>
-  </div>
-  
 	<script>
 		//example of calling custom function
 		helloWorld();
