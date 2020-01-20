@@ -1,18 +1,74 @@
-import sqlite3 as lite
-import sys
+import sqlite3
+import os,sys
 
-con=lite.connect('data\\tattoo.db')
+dirname = os.path.dirname(sys.argv[0])
+sys.path.append(dirname.replace('\\', '/') + '/entiteti/')
 
-print("Creating database/tables...")
-with con:
-    cur=con.cursor()
-    cur.execute("DROP TABLE IF EXISTS tattoo")
+from tattoo import Tattoo 
 
-    cur.execute("CREATE TABLE tattoo (id INTEGER PRIMARY KEY AUTOINCREMENT, tattoo_id TEXT, title TEXT, velicina TEXT, vrijeme TIME, cijena INTEGER)")
+def unesi_demo_podatke():
+    con=sqlite3.connect('tattoo.db')
+    try:
+        cur=con.cursor()
+        cur.execute("DROP TABLE IF EXISTS tattoo")
 
-    cur.execute("CREATE TABLE osoblje (id INTEGER PRIMARY KEY AUTOINCREMENT, osoblje_id TEXT, ime TEXT, prezime TEXT)")
+        cur.execute("CREATE TABLE tattoo (tattoo_id INTEGER PRIMARY KEY AUTOINCREMENT, naziv TEXT NOT NULL, velicina TEXT NOT NULL, vrijeme TIME NOT NULL, cijena INTEGER NOT NULL)")
+        cur.execute("CREATE TABLE osoblje (osoblje_id INTEGER PRIMARY KEY AUTOINCREMENT, ime TEXT NOT NULL, prezime TEXT NOT NULL)")
+        cur.execute("CREATE TABLE racun (racun_id INTEGER PRIMARY KEY AUTOINCREMENT, broj_racuna INTEGER NOT NULL, osoblje_id INTEGER NOT NULL, tattoo_id INTEGER NOT NULL, ukupno INTEGER NOT NULL)")
 
-    cur.execute("CREATE TABLE racun (id INTEGER PRIMARY KEY AUTOINCREMENT, racun_id TEXT, broj_racuna INTEGER, osoblje_id TEXT, ukupno INTEGER)")
+        cur.execute("INSERT INTO tattoo (naziv,velicina,vrijeme,cijena) VALUES (?,?,?)",("Ptica","mala",60,500))
+        con.commit()
+        cur.execute("INSERT INTO osoblje (ime,prezime) VALUES (?,?)",("Ivana","Konta"))
+        con.commit()
 
-con.close()
-print("Database/tables created.")
+    except Exception as e:
+        print("Dogodila se greska pri kreiranju demo podataka: ",e)
+        con.rollback()
+    con.close()
+
+def procitaj_podatke():
+    con=sqlite3.connect("tattoo.db")
+    lista_tetovaza=[]
+    try:
+        cur=con.cursor()
+        cur.execute(""" SELECT tattoo_id,naziv,velicina,vrijeme,cijena FROM tattoo """)
+        
+        podaci=cur.fetchall()
+
+        for tat in podaci:
+            # 0 - id
+            # 1 - naziv
+            # 2 - velicina
+            # 3 - vrijeme
+            # 4 - cijena
+
+            t=Tattoo(tat[0],tat[1],tat[2],tat[3],tat[4])
+            lista_tetovaza.append(t)
+
+        print ("Uspjesno dohvaceni svi podaci iz tablice tetovaza")
+
+        for t in lista_tetovaza:
+            print(t)
+        
+    
+    except Exception as e:
+        print("Dogodila se greska pri dohvacanju svih podataka iz tablice tetovaza: ",e)
+        con.rollback()
+
+    con.close()
+    return lista_tetovaza
+
+def sacuvaj_novu_tetovazu(naziv,velicina,vrijeme,cijena):
+    con=sqlite3.connect("tattoo.db")
+    try:
+        cur=con.cursor()
+        cur.execute("INSERT INTO tattoo (naziv,velicina,vrijeme,cijena) VALUES (?,?,?,?)",(naziv,velicina,vrijeme,cijena))
+        con.commit()
+
+        print("Uspjesno dodan novi profesor u bazu podataka")
+    
+    except Exception as e:
+        print("Dogodila se greska pri dodavanju novog profesora u bazu podataka: ",e)
+        con.rollback()
+
+    con.close()

@@ -44,5 +44,8 @@ def about():
 def contact():
     return template('contact')
    
-    
+@app.route('/tattoo')
+def tattoo():
+    return template('tattoo')
+
 run(app, host='localhost', port = 4040)

@@ -39,7 +39,7 @@
               Naši radovi
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="/tattoo">Tetovaže</a>
+              <a class="dropdown-item" href="#">Tetovaže</a>
               <a class="dropdown-item" href="#">Piercing</a>
             </div>
           </li>
@@ -53,43 +53,40 @@
 
   <!-- Page Content -->
   <div class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <h1 class="mt-5">Tattoo studio</h1>
-        <ul class="list-unstyled">
-          <li>Tattoo</li>
-          <li>Piercing</li>
-        </ul>
-      </div>
-    </div>
-    <img src="http://gotham-news.com/wp-content/uploads/2018/08/tattoo-shop-artist.jpg" width="100%" margin="0px" class="image"/>
-	
-	<div class="row">
-            <div class="jumbotron">
-            <h2>Welcome</h2>
-                <p>Naše boje za tetoviranje su jake i postojane, dermatološki ispitane te su trenutno najpouzdanije boje za tetoviranje dostupne na tržištu. Stoga, osim tetovaže i piercinga, nudimo vam i lasersko uklanjanje tetovaže.
+	<div class="row" style="margin-top: 50px;">
+        <form style="width: 100%" action='{{form_akcija}}' method='POST'>
 
-                  U našem studiju uz kvalitetan rad dobijete i vrhunski ugođaj pri samom tetoviranju uz koji možete potpuno zaboraviti na bol: jako udobna tattoo stolica, besplatan wi fi, tv, playstation 4 itd.  Konačno i ono najvažnije: sama djelatnost tetoviranja/piercinga zahtijeva visoke higijenske uvjete koje Tattoo studio strogo provodi i na kojima inzistira zbog zaštite klijenta i održavanja struke na profesionalnoj razini.</p>
+            <input type="hidden" class="form-control" id="tattooid" name='tattooid' value='{{data.id if data != None else ""}}'>
+
+            <div class="form-group">
+                <label for="naziv">Naziv</label>
+                <input type="text" class="form-control" id="naziv" name='naziv' value='{{data.naziv if data != None else ""}}' aria-describedby="naziv-help" placeholder="Unesite naziv" required>
             </div>
-        </div>
-  <div class="newsletter">
-    <h2>Subscribe</h2>
-    <p>Subscribe to our newsletter</p>
-    <input type="text" placeholder="Enter your E-mail">
-  </div>
-  <div class="button">
-    <button class="subBtn">Subscribe</button>
-  </div>
-        <!--./row-->
-        <div class="row">
-            <hr>
-            <footer>
-              <br>
-                <p>&copy; 2019 {{data["developer_organization"]}}.</p>
-            </footer>           
-        </div>
-  </div>
-  
+
+            <div class="form-group">
+                <label for="vrijeme">Vrijeme</label>
+                <input type="number" class="form-control" id="vrijeme" name='vrijeme' value='{{data.vrijeme if data != None else ""}}' aria-describedby="vrijeme-help" placeholder="Unesite vrijeme" required>
+            </div>
+
+            <div class="form-group">
+                <label for="velicina">Veličina</label>
+                <input type="text" class="form-control" id="velicina" name='velicina value='{{data.velicina if data != None else ""}}' aria-describedby="velicina-help" placeholder="Unesite veličinu" required>
+            </div>
+
+            <div class="form-group">
+                <label for="zaposlenik">Zaposlenik</label>
+                <input type="text" class="form-control" id="zaposlenik" name='zaposlenikvalue='{{data.zaposlenik if data != None else ""}}' aria-describedby="zaposlenik-help" placeholder="Unesite zaposlenika" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cijena">Cijena</label>
+                <input type="number" class="form-control" id="cijena" name='cijena value='{{data.cijena if data != None else ""}}' aria-describedby="cijena-help" placeholder="Unesite cijenu" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Sačuvaj</button>
+
+        </form>     
+    </div>
 	<script>
 		//example of calling custom function
 		helloWorld();
