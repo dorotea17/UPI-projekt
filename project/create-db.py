@@ -72,3 +72,58 @@ def sacuvaj_novu_tetovazu(naziv,velicina,vrijeme,cijena):
         con.rollback()
 
     con.close()
+ 
+ def izbrisi_tetovazu(tattoo_id):
+     con = sqlite3.connect("tattoo.db")
+     try:
+         cur = con.cursor()
+         cur.execute("DELETE FROM tattoo WHERE tattoo_id=?;", (tat_id))
+         con.commit()
+
+         print ("uspjesno izbrisana tetovaza iz baze podataka")
+
+     except Exception as e:
+         print ("Dogodila se greska pri brisanju tetovaze iz baze podaraka: ", e)
+         con.rollback()
+
+     con.close()
+
+ def dohvati_tetovazu_po_id(tat_id):
+     con = sqlite3.connect("tattoo.db")
+     tattoo = None
+     try:
+
+         cur = con.cursor()
+         cur.execute("SELECT tattoo_id, naziv, velicina, vrijeme, cijena FROM tattoo WHERE tattoo_id=?", (tat_id))
+         podaci = cur.fetchone()
+
+         print ("podaci", podaci)
+         tattoo = Tattoo(podaci[0], podaci[1], podaci[2], podaci[3], podaci[4])
+
+         print("Uspjesno dohvacena tetovaza iz baze podataka po ID-u")
+
+     except Exception as e:
+         print ("Dogodila se greska pri dohvacanju tetovaze iz baze podataka po ID-u: ", e)
+         con.rollback()
+
+     con.close()
+     return tattoo  
+
+ def azuriraj_tetovazu(tattoo_id, naziv, velicina, vrijeme, cijena):
+    conn = sqlite3.connect("tattoo.db")
+    try:
+
+        cur = conn.cursor()
+        cur.execute("UPDATE tattoo SET naziv = ?, veliina = ?, vrijeme = ?, cijena = ? WHERE tattoo_id = ?", (naziv, velicina, vrijeme, cijena, tat_id))
+        conn.commit()
+
+        print("uspjesno ažurirana tetovaza iz baze podataka")
+
+    except Exception as e: 
+        print("Dogodila se greska pri ažuriranju tetovaze iz baze podataka: ", e)
+        conn.rollback()
+
+    conn.close()
+
+
+    
