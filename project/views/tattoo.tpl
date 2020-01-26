@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Bottle web project template">
     <meta name="author" content="datamate">
-       
     <title>My UPI Project</title>
     <link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/static/custom.css">
@@ -34,17 +33,26 @@
           <li class="nav-item" id="about">
             <a class="nav-link" href="/about">O nama</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-              Naši radovi
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Tetovaže</a>
-              <a class="dropdown-item" href="#">Piercing</a>
-            </div>
+          <li class="nav-item">
+            <a class="nav-link" href="/tattoo">Tetovaže</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/contact">Kontakt</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/signin">Prijava
+              <span class="sr-only"></span>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              Tattoo Studio
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Tetovaže</a>
+              <a class="dropdown-item" href="#">Osoblje</a>
+              <a class="dropdown-item" href="#">Računi</a>
+            </div>
           </li>
         </ul>
       </div>
@@ -53,40 +61,50 @@
 
   <!-- Page Content -->
   <div class="container">
-	<div class="row" style="margin-top: 50px;">
-        <form style="width: 100%" action='{{form_akcija}}' method='POST'>
-
-            <input type="hidden" class="form-control" id="tattooid" name='tattooid' value='{{data.id if data != None else ""}}'>
-
-            <div class="form-group">
-                <label for="naziv">Naziv</label>
-                <input type="text" class="form-control" id="naziv" name='naziv' value='{{data.naziv if data != None else ""}}' aria-describedby="naziv-help" placeholder="Unesite naziv" required>
-            </div>
-
-            <div class="form-group">
-                <label for="vrijeme">Vrijeme</label>
-                <input type="number" class="form-control" id="vrijeme" name='vrijeme' value='{{data.vrijeme if data != None else ""}}' aria-describedby="vrijeme-help" placeholder="Unesite vrijeme" required>
-            </div>
-
-            <div class="form-group">
-                <label for="velicina">Veličina</label>
-                <input type="text" class="form-control" id="velicina" name='velicina value='{{data.velicina if data != None else ""}}' aria-describedby="velicina-help" placeholder="Unesite veličinu" required>
-            </div>
-
-            <div class="form-group">
-                <label for="zaposlenik">Zaposlenik</label>
-                <input type="text" class="form-control" id="zaposlenik" name='zaposlenikvalue='{{data.zaposlenik if data != None else ""}}' aria-describedby="zaposlenik-help" placeholder="Unesite zaposlenika" required>
-            </div>
-
-            <div class="form-group">
-                <label for="cijena">Cijena</label>
-                <input type="number" class="form-control" id="cijena" name='cijena value='{{data.cijena if data != None else ""}}' aria-describedby="cijena-help" placeholder="Unesite cijenu" required>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Sačuvaj</button>
-
-        </form>     
+    <div class="row" style="padding:25px 0;">
+      <div class="col-md-2 text-center" style="padding: 0">
+        <a href='' class="btn btn-secondary">Dodaj novu tetovažu</a>
+      </div>
     </div>
+    <div class="row">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Naziv</th>
+            <th scope="col">Veličina</th>
+            <th scope="col">Vrijeme</th>
+            <th scope="col">Cijena</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          %for item in data:
+
+            <tr>
+              <th scope="row">{{item.tattoo.id}}</th>
+              <td>{{item.tattoo.naziv}}</td>
+              <td>{{item.tattoo.veličina}}</td>
+              <td>{{item.tattoo.vrijeme}}</td>
+              <td>{{item.tattoo.cijena}}</td>
+              <td>
+                <a href=''>
+                  <i class="fas fa-edit"></i>
+                </a>
+              </td>
+              <td>
+                <a href=''>
+                  <i class="fas fa-trash-alt"></i>
+                </a>
+              </td>
+            </tr>
+
+            %end
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
 	<script>
 		//example of calling custom function
 		helloWorld();

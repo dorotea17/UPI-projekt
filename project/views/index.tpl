@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Bottle web project template">
     <meta name="author" content="datamate">
-       
     <title>My UPI Project</title>
     <link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/static/custom.css">
@@ -34,17 +33,16 @@
           <li class="nav-item" id="about">
             <a class="nav-link" href="/about">O nama</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-              Naši radovi
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="/tattoo">Tetovaže</a>
-              <a class="dropdown-item" href="#">Piercing</a>
-            </div>
+          <li class="nav-item">
+            <a class="nav-link" href="/tattoo">Tetovaže</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/contact">Kontakt</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/signin">Prijava
+              <span class="sr-only"></span>
+            </a>
           </li>
         </ul>
       </div>
@@ -58,7 +56,6 @@
         <h1 class="mt-5">Tattoo studio</h1>
         <ul class="list-unstyled">
           <li>Tattoo</li>
-          <li>Piercing</li>
         </ul>
       </div>
     </div>
@@ -72,14 +69,6 @@
                   U našem studiju uz kvalitetan rad dobijete i vrhunski ugođaj pri samom tetoviranju uz koji možete potpuno zaboraviti na bol: jako udobna tattoo stolica, besplatan wi fi, tv, playstation 4 itd.  Konačno i ono najvažnije: sama djelatnost tetoviranja/piercinga zahtijeva visoke higijenske uvjete koje Tattoo studio strogo provodi i na kojima inzistira zbog zaštite klijenta i održavanja struke na profesionalnoj razini.</p>
             </div>
         </div>
-  <div class="newsletter">
-    <h2>Subscribe</h2>
-    <p>Subscribe to our newsletter</p>
-    <input type="text" placeholder="Enter your E-mail">
-  </div>
-  <div class="button">
-    <button class="subBtn">Subscribe</button>
-  </div>
         <!--./row-->
         <div class="row">
             <hr>

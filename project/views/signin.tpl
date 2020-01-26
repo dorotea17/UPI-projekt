@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Bottle web project template">
-    <meta name="author" content="datamate">      
+    <meta name="author" content="datamate">       
     <title>My UPI Project</title>
     <link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/static/custom.css">
@@ -31,19 +31,18 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/about">O nama
+              <span class="sr-only"></span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/tattoo">Tetovaže</a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/contact">Kontakt
-                <span class="sr-only">(current)</span>
-            </a>
-          </li>
           <li class="nav-item">
+            <a class="nav-link" href="/contact">Kontakt</a>
+          </li>
+          <li class="nav-item active">
             <a class="nav-link" href="/signin">Prijava
-              <span class="sr-only"></span>
+              <span class="sr-only">(current)</span>
             </a>
           </li>
         </ul>
@@ -55,41 +54,25 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h1 class="mt-5">Kontakt</h1>
-        <div class="row">
-            <div class="column text-center">          
-                <h3>Tattoo studio</h3>
-                <p>
-                    Ruđera Boškovića 33,<br>
-                    21 000, Split<br>
-                    <br>
-                    Telefon: 0958138526<br>
-                             0977235099<br>
-                     <br>       
-                    E-mail: ikonta@pmfst.hr<br>
-                            dbertovic@pmfst.hr<br>
-                            <br>
-                    Radno vrijeme:<br>
-                    Ponedjeljak – Subota 13h – 20h<br>
-                    Nedjeljom i praznikom od ne radimo
-                          
-    
-                </p></div>
-            <div class="column">
-                
-        <div class="mapouter">
-            <div class="gmap_canvas">
-                <iframe width="500" height="600" id="gmap_canvas" src="https://maps.google.com/maps?q=ru%C4%91era%20bo%C5%A1kovi%C4%87a%2033&t=&z=17&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
-                </iframe>
-                <a href="https://www.embedgooglemap.net/blog/nordvpn-coupon-code/"></a>
-            </div>
-            <style>.mapouter{position:relative;text-align:right;height:700px;width:600px;}.gmap_canvas {overflow:hidden;background:none!important;height:700px;width:600px;}</style>
-        </div>
-            </div>
-          </div>
+        <h1 class="mt-5">Prijava</h1>
     </div>
-
+    <div class="container">
+        <div class="row" style="margin-top: 50px; padding-top: 30px; font-size: 20px;">
+            <form style="width: 100%">    
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name='email' placeholder="Unesite email..." required width="80%">
+        <br>
+        <label for="password">Lozinka</label>
+        <input type="password" class="form-control" id="password" name='password' placeholder="Unesite lozinku..." required width="80%">
+        </form>
+        </div>
+    </div>
+    <div class="button">
+      <br>
+        <button type="button" class="btn btn-secondary">Sign in</button>
+    </div>
   </div>
+</div>
 	<script>
 		//example of calling custom function
 		helloWorld();
