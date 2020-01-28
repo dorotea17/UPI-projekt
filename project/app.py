@@ -3,11 +3,10 @@ from bottle import Bottle, run, \
 
 import os, sys
 
-from baza import unesi_demo_podatke, procitaj_podatke_tetovaze, sacuvaj_novu_tetovazu, dohvati_tetovazu_po_id, azuriraj_tetovazu, izbrisi_tetovazu
+from baza import unesi_demo_podatke, procitaj_podatke_tetovaze
 
 unesi_demo_podatke()
 procitaj_podatke_tetovaze()
-
 dirname = os.path.dirname(sys.argv[0])
 template_path=dirname+'\\views'
 app = Bottle()

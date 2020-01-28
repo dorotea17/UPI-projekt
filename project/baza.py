@@ -4,9 +4,9 @@ import os,sys
 dirname = os.path.dirname(sys.argv[0])
 sys.path.append(dirname.replace('\\', '/') + '/entiteti/')
 
-from tattoo import Tattoo 
-# from osoblje import Osoblje
-# from racuni import Racuni
+from tetovaze import Tattoo 
+from osoblje import Osoblje
+from racuni import Racuni
 
 def unesi_demo_podatke():
     con=sqlite3.connect('tattoo.db')
@@ -15,6 +15,7 @@ def unesi_demo_podatke():
         cur=con.cursor()
         cur.executescript("""
         
+        DROP TABLE IF EXISTS tattoo;
         DROP TABLE IF EXISTS tetovaze;
         
         CREATE TABLE tetovaze (
@@ -24,10 +25,10 @@ def unesi_demo_podatke():
             vrijeme time NOT NULL,
             cijena integer NOT NULL);
         """)
-        print("Uspjesno kreirana tablica tattoo")
+        print("Uspjesno kreirana tablica tetovaze")
 
-        cur.execute("INSERT INTO tetovaze (naziv,velicina,vrijeme,cijena) VALUES (?,?,?)",("Ptica","mala",60,500))
-        cur.execute("INSERT INTO tetovaze (naziv,velicina,vrijeme,cijena) VALUES (?,?,?)",("Zmaj","velika",180,5000))
+        cur.execute("INSERT INTO tetovaze (naziv,velicina,vrijeme,cijena) VALUES (?,?,?,?)",("Ptica","mala",60,500))
+        cur.execute("INSERT INTO tetovaze (naziv,velicina,vrijeme,cijena) VALUES (?,?,?,?)",("Zmaj","velika",180,5000))
         con.commit()
 
         print("Uspjesno uneseni testni podaci u tablicu tetovaze")
@@ -36,7 +37,7 @@ def unesi_demo_podatke():
         print("Dogodila se greska pri kreiranju demo podataka: ",e)
         con.rollback()
 
-    # # za tablicu osoblje
+    # za tablicu osoblje
     # try:
     #     cur=con.cursor()
     #     cur.executescript("""
@@ -46,60 +47,71 @@ def unesi_demo_podatke():
     #     CREATE TABLE osoblje (
     #         id INTEGER PRIMARY KEY,
     #         ime text NOT NULL,
-    #         prezime text NOT NULL
-    #         datumpocetkarada date NOT NULL
+    #         prezime text NOT NULL,
+    #         datumpocetkarada date NOT NULL,
     #         brojtetovazaizradenih integer NOT NULL);
     #     """)
     #     print("Uspjesno kreirana tablica osoblje")
 
-    #     cur.execute("INSERT INTO osoblje (ime,prezime,datumpocetkarada,brojtetovazaizradenih) VALUES (?,?,?,?)",("Ivana","Konta","2020-01-01"))
-    #     cur.execute("INSERT INTO osoblje (ime,prezime,datumpocetkarada,brojtetovazaizradenih) VALUES (?,?,?,?)",("Dorotea","Bertović","2019-12-07"))
+    #     cur.execute("INSERT INTO osoblje (ime,prezime,datumpocetkarada,brojtetovazaizradenih) VALUES (?,?,?,?)",("Ivana","Konta","2020-01-01",4))
+    #     cur.execute("INSERT INTO osoblje (ime,prezime,datumpocetkarada,brojtetovazaizradenih) VALUES (?,?,?,?)",("Dorotea","Bertović","2019-12-07",7))
     #     con.commit()
+
+    #     print("Uspjesno uneseni testni podaci u tablicu osoblje")
 
     # except Exception as e:
     #     print("Dogodila se greska pri kreiranju demo podataka: ",e)
     #     con.rollback()
 
-    # #tablica racuni
-    #  try:
+    # tablica racuni
+    # try:
     #     cur=con.cursor()
     #     cur.executescript("""
         
+    #     DROP TABLE IF EXISTS racun;
     #     DROP TABLE IF EXISTS racuni;
         
     #     CREATE TABLE racuni (
     #         id INTEGER PRIMARY KEY,
     #         datum date NOT NULL,
+    #         osoblje_id integer NOT NULL,
+    #         tetovaze_id integer NOT NULL,
+    #         ukupno integer NOT NULL,
     #         FOREIGN KEY (osoblje_id) REFERENCES osoblje (id),
-    #         FOREIGN KEY (tattoo_id) REFERENCES tattoo (id),
-    #         ukupno integer NOT NULL);
+    #         FOREIGN KEY (tetovaze_id) REFERENCES tetovaze (id));
     #     """)
     #     print("Uspjesno kreirana tablica racuni")
 
-    #     cur.execute("INSERT INTO racuni (datum, osoblje_id, tattoo_id, ukupno) VALUES (?,?,?,?)", ("2019-12-12",2,2,5000))
-    #     cur.execute("INSERT INTO racuni (datum, osoblje_id, tattoo_id, ukupno) VALUES (?,?,?,?)", ("2020-01-01",1,1,500))
+    #     cur.execute("INSERT INTO racuni (datum, osoblje_id, tetovaze_id, ukupno) VALUES (?,?,?,?)", ("2019-12-12",2,2,5000))
+    #     cur.execute("INSERT INTO racuni (datum, osoblje_id, tetovaze_id, ukupno) VALUES (?,?,?,?)", ("2020-01-01",1,1,500))
     #     con.commit()
+
+    #     print("Uspjesno uneseni testni podaci u tablicu racuni")
+
 
     # except Exception as e:
     #     print("Dogodila se greska pri kreiranju demo podataka: ",e)
     #     con.rollback()
 
     #     #tablica korisnik
-    #  try:
+    # try:
     #     cur=con.cursor()
     #     cur.executescript("""
         
     #     DROP TABLE IF EXISTS korisnik;
         
     #     CREATE TABLE korisnik (
-    #     e-mail email NOT NULL,
+    #     e_mail email NOT NULL,
     #     lozinka password NOT NULL);
     #     """)
     #     print("Uspjesno kreirana tablica korisnik")
 
-    #     cur.execute("INSERT INTO korisnik (e-mail, lozinka) VALUES (?,?)", ("ikonta@pmfst.hr","ikonta"))
-    #     cur.execute("INSERT INTO korisnik (e-mail, lozinka) VALUES (?,?)", ("dbertovic@pmfst.hr","dbertovic"))
+    #     cur.execute("INSERT INTO korisnik (e_mail, lozinka) VALUES (?,?)", ("ikonta@pmfst.hr","ikonta"))
+    #     cur.execute("INSERT INTO korisnik (e_mail, lozinka) VALUES (?,?)", ("dbertovic@pmfst.hr","dbertovic"))
     #     con.commit()
+
+    #     print("Uspjesno uneseni testni podaci u tablicu korisnik")
+
 
     # except Exception as e:
     #     print("Dogodila se greska pri kreiranju demo podataka: ",e)
@@ -131,7 +143,6 @@ def procitaj_podatke_tetovaze():
         for t in lista_tetovaza:
             print(t)
         
-    
     except Exception as e:
         print("Dogodila se greska pri dohvacanju svih podataka iz tablice tetovaze: ",e)
         con.rollback()
@@ -139,69 +150,69 @@ def procitaj_podatke_tetovaze():
     con.close()
     return lista_tetovaza
 
-def sacuvaj_novu_tetovazu(naziv,velicina,vrijeme,cijena):
-    con=sqlite3.connect("tattoo.db")
-    try:
-        cur=con.cursor()
-        cur.execute("INSERT INTO tetovaze (naziv,velicina,vrijeme,cijena) VALUES (?,?,?,?)",(naziv,velicina,vrijeme,cijena))
-        con.commit()
+# def sacuvaj_novu_tetovazu(naziv,velicina,vrijeme,cijena):
+#     con=sqlite3.connect("tattoo.db")
+#     try:
+#         cur=con.cursor()
+#         cur.execute("INSERT INTO tetovaze (naziv,velicina,vrijeme,cijena) VALUES (?,?,?,?)",(naziv,velicina,vrijeme,cijena))
+#         con.commit()
 
-        print("Uspjesno dodana nova tetovaza u bazu podataka")
+#         print("Uspjesno dodana nova tetovaza u bazu podataka")
     
-    except Exception as e:
-        print("Dogodila se greska pri dodavanju nove tetovaze u bazu podataka: ",e)
-        con.rollback()
+#     except Exception as e:
+#         print("Dogodila se greska pri dodavanju nove tetovaze u bazu podataka: ",e)
+#         con.rollback()
 
-    con.close()
+#     con.close()
  
- def izbrisi_tetovazu(tat_id):
-     con = sqlite3.connect("tattoo.db")
-     try:
-         cur = con.cursor()
-         cur.execute("DELETE FROM tetovaze WHERE id=?;", (tat_id))
-         con.commit()
+#  def izbrisi_tetovazu(tetovaze_id):
+#      con = sqlite3.connect("tattoo.db")
+#     try:
+#         cur = con.cursor()
+#         cur.execute("DELETE FROM tetovaze WHERE id=?;", (tetovaze_id))
+#         con.commit()
 
-         print ("uspjesno izbrisana tetovaza iz baze podataka")
+#         print ("uspjesno izbrisana tetovaza iz baze podataka")
 
-     except Exception as e:
-         print ("Dogodila se greska pri brisanju tetovaze iz baze podaraka: ", e)
-         con.rollback()
+#     except Exception as e:
+#         print ("Dogodila se greska pri brisanju tetovaze iz baze podaraka: ", e)
+#         con.rollback()
 
-     con.close()
+#     con.close()
+               #do tuuuuuuuu
+#  def dohvati_tetovazu_po_id(tat_id):
+#      con = sqlite3.connect("tattoo.db")
+#      tattoo = None
+#      try:
 
- def dohvati_tetovazu_po_id(tat_id):
-     con = sqlite3.connect("tattoo.db")
-     tattoo = None
-     try:
+#          cur = con.cursor()
+#          cur.execute("SELECT id, naziv, velicina, vrijeme, cijena FROM tetovaze WHERE id=?", (tat_id))
+#          podaci = cur.fetchone()
 
-         cur = con.cursor()
-         cur.execute("SELECT id, naziv, velicina, vrijeme, cijena FROM tetovaze WHERE id=?", (tat_id))
-         podaci = cur.fetchone()
+#          print ("podaci", podaci)
+#          tattoo = Tattoo(podaci[0], podaci[1], podaci[2], podaci[3], podaci[4])
 
-         print ("podaci", podaci)
-         tattoo = Tattoo(podaci[0], podaci[1], podaci[2], podaci[3], podaci[4])
+#          print("Uspjesno dohvacena tetovaza iz baze podataka po ID-u")
 
-         print("Uspjesno dohvacena tetovaza iz baze podataka po ID-u")
+#      except Exception as e:
+#          print ("Dogodila se greska pri dohvacanju tetovaze iz baze podataka po ID-u: ", e)
+#          con.rollback()
 
-     except Exception as e:
-         print ("Dogodila se greska pri dohvacanju tetovaze iz baze podataka po ID-u: ", e)
-         con.rollback()
+#      con.close()
+#      return tattoo  
 
-     con.close()
-     return tattoo  
+#  def azuriraj_tetovazu(tat_id, naziv, velicina, vrijeme, cijena):
+#     con = sqlite3.connect("tattoo.db")
+#     try:
 
- def azuriraj_tetovazu(tat_id, naziv, velicina, vrijeme, cijena):
-    con = sqlite3.connect("tattoo.db")
-    try:
+#         cur = con.cursor()
+#         cur.execute("UPDATE tetovaze SET naziv = ?, velicina = ?, vrijeme = ?, cijena = ? WHERE id = ?", (naziv, velicina, vrijeme, cijena, tat_id))
+#         con.commit()
 
-        cur = con.cursor()
-        cur.execute("UPDATE tetovaze SET naziv = ?, velicina = ?, vrijeme = ?, cijena = ? WHERE id = ?", (naziv, velicina, vrijeme, cijena, tat_id))
-        con.commit()
+#         print("uspjesno ažurirana tetovaza iz baze podataka")
 
-        print("uspjesno ažurirana tetovaza iz baze podataka")
+#     except Exception as e: 
+#         print("Dogodila se greska pri ažuriranju tetovaze iz baze podataka: ", e)
+#         con.rollback()
 
-    except Exception as e: 
-        print("Dogodila se greska pri ažuriranju tetovaze iz baze podataka: ", e)
-        con.rollback()
-
-    con.close()
+#     con.close()

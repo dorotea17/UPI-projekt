@@ -9,6 +9,8 @@
     <title>My UPI Project</title>
     <link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/static/custom.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
     <script type="text/javascript" src="/static/jquery.js"></script>
 	<script type="text/javascript" src="/static/custom.js"></script>
     <script type="text/javascript" src="/static/bootstrap.min.js"></script> 
@@ -25,34 +27,20 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/">Početna
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item" id="about">
-            <a class="nav-link" href="/about">O nama</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/tattoo">Tetovaže</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/contact">Kontakt</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/signin">Prijava
-              <span class="sr-only"></span>
-            </a>
-          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
               Tattoo Studio
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Tetovaže</a>
+              <a class="dropdown-item active" href="/tattoo">Tetovaže<span class="sr-only">(current)</span></a>
               <a class="dropdown-item" href="#">Osoblje</a>
               <a class="dropdown-item" href="#">Računi</a>
             </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Odjava</a>
+              <span class="sr-only"></span>
+            </a>
           </li>
         </ul>
       </div>
@@ -63,7 +51,7 @@
   <div class="container">
     <div class="row" style="padding:25px 0;">
       <div class="col-md-2 text-center" style="padding: 0">
-        <a href='' class="btn btn-secondary">Dodaj novu tetovažu</a>
+        <a href='#' class="btn btn-secondary">Dodaj novu tetovažu</a>
       </div>
     </div>
     <div class="row">
@@ -82,18 +70,18 @@
           %for item in data:
 
             <tr>
-              <th scope="row">{{item.tattoo.id}}</th>
-              <td>{{item.tattoo.naziv}}</td>
-              <td>{{item.tattoo.veličina}}</td>
-              <td>{{item.tattoo.vrijeme}}</td>
-              <td>{{item.tattoo.cijena}}</td>
+              <th scope="row">{{item.id}}</th>
+              <td>{{item.naziv}}</td>
+              <td>{{item.velicina}}</td>
+              <td>{{item.vrijeme}}</td>
+              <td>{{item.cijena}}</td>
               <td>
-                <a href=''>
+                <a href='#'>
                   <i class="fas fa-edit"></i>
                 </a>
               </td>
               <td>
-                <a href=''>
+                <a href='#'>
                   <i class="fas fa-trash-alt"></i>
                 </a>
               </td>

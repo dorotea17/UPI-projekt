@@ -44,6 +44,16 @@
               <span class="sr-only"></span>
             </a>
           </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              Tattoo Studio
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/tattoo">Tetovaže</a>
+              <a class="dropdown-item" href="#">Osoblje</a>
+              <a class="dropdown-item" href="#">Računi</a>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
