@@ -186,7 +186,7 @@ def izbrisi_tetovazu(tetovaze_id):
 
 def dohvati_tetovazu_po_id(tetovaze_id):
     con = sqlite3.connect("tattoo.db")
-    tetovaza = None
+    tetovaze = None
     try:
 
         cur = con.cursor()
@@ -203,7 +203,7 @@ def dohvati_tetovazu_po_id(tetovaze_id):
         con.rollback()
 
     con.close()
-    return tetovaza  
+    return tetovaze  
 
 def azuriraj_tetovazu(tetovaze_id, naziv, velicina, vrijeme, cijena):
     con = sqlite3.connect("tattoo.db")

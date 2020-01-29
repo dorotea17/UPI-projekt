@@ -51,14 +51,14 @@
   <div class="container">
     <div class="row" style="padding:25px 0;">
       <div class="col-md-2 text-center" style="padding: 0">
-        <a href='#' class="btn btn-secondary">Dodaj novu tetovažu</a>
+        <a href='/nova-tattoo' class="btn btn-secondary">Dodaj novu tetovažu</a>
       </div>
     </div>
     <div class="row">
       <table class="table" style="background-color: white;">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">#</th>  
             <th scope="col">Naziv</th>
             <th scope="col">Veličina</th>
             <th scope="col">Vrijeme</th>

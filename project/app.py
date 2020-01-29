@@ -82,10 +82,11 @@ def azuriraj_tattoo_save():
     vrijeme=int(request.forms.get("vrijeme"))
     cijena=int(request.forms.get("cijena"))
 
+
     azuriraj_tetovazu(tetovaze_id,naziv,velicina,vrijeme,cijena)
     redirect('/tattoo')
 
-@app.route('izbrisi-tattoo')
+@app.route('/izbrisi-tattoo')
 def izbrisi_tattoo():
     tetovaze_id = request.query['tetovazeid']
     izbrisi_tetovazu(tetovaze_id)

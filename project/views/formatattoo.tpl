@@ -52,32 +52,29 @@
 	<div class="row" style="margin-top: 50px;">
         <form style="width: 100%" action='{{form_akcija}}' method='POST'>
 
-            <input type="hidden" class="form-control" id="tetovazeid" name='tetovazeid' value='{{data.id if data != None else ""}}'>
+            <input type="hidden" class="form-control" id="tetovazeid" name='tetovazeid' value='{{data._id if data != None else ""}}'>
 
             <div class="form-group">
                 <label for="naziv">Naziv</label>
-                <input type="text" class="form-control" id="naziv" name='naziv' value='{{data.naziv if data != None else ""}}' aria-describedby="naziv-help" placeholder="Unesite naziv" required>
+                <input type="text" class="form-control" id="naziv" name='naziv' value='{{data._naziv if data != None else ""}}' aria-describedby="naziv-help" placeholder="Unesite naziv" required>
             </div>
 
-        <div class="ui-field-contain">
-				<label for="velicina">Veličina</label><br>
-				<select name="velicina" id="velicina">
-					<option value="{{data.velicina if data != None else 'mala'}}">Mala</option>
-					<option value="{{data.velicina if data != None else 'velika'}}">Velika</option>
-				</select>
-      </div>
+            <div class="form-group">
+              <label for="velicina">Veličina</label>
+              <input type="text" class="form-control" id="velicina" name='velicina' value='{{data._velicina if data != None else ""}}' aria-describedby="velicina-help" placeholder="Unesite velicinu" required>
+          </div>
             
             <div class="form-group">
                 <label for="vrijeme">Vrijeme</label>
-                <input type="number" class="form-control" id="vrijeme" name='vrijeme' value='{{data.vrijeme if data != None else ""}}' aria-describedby="vrijeme-help" placeholder="Unesite vrijeme" required>
+                <input type="number" class="form-control" id="vrijeme" name='vrijeme' value='{{data._vrijeme if data != None else ""}}' aria-describedby="vrijeme-help" placeholder="Unesite vrijeme" required>
             </div>
 
             <div class="form-group">
                 <label for="cijena">Cijena</label>
-                <input type="number" class="form-control" id="cijena" name='cijena' value='{{data.cijena if data != None else ""}}' aria-describedby="cijena-help" placeholder="Unesite cijenu" required>
+                <input type="number" class="form-control" id="cijena" name='cijena' value='{{data._cijena if data != None else ""}}' aria-describedby="cijena-help" placeholder="Unesite cijenu" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Sačuvaj</button>
+            <button type="submit" class="btn btn-primary" name="save">Sačuvaj</button>
 
         </form>     
     </div>
