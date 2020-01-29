@@ -51,7 +51,7 @@
   <div class="container">
     <div class="row" style="padding:25px 0;">
       <div class="col-md-2 text-center" style="padding: 0">
-        <a href='#' class="btn btn-secondary">Dodaj novu tetovažu</a>
+        <a href='/newTattoo' class="btn btn-secondary">Dodaj novu tetovažu</a>
       </div>
     </div>
     <div class="row">
@@ -77,12 +77,12 @@
               <td>{{item._vrijeme}}</td>
               <td>{{item._cijena}}</td>
               <td>
-                <a href='/azuriraj-tattoo?tetovazeid={{item._id}}'>
+                <a href='edit{{item._id}}'>
                   <i class="fas fa-edit"></i>
                 </a>
               </td>
               <td>
-                <a href='/izbrisi-tattoo?tetovazeid={{item._id}}'>
+                <a href='delete{{item._id}}'>
                   <i class="fas fa-trash-alt"></i>
                 </a>
               </td>

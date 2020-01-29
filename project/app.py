@@ -85,10 +85,14 @@ def azuriraj_tattoo_save():
     azuriraj_tetovazu(tetovaze_id,naziv,velicina,vrijeme,cijena)
     redirect('/tattoo')
 
-@app.route('izbrisi-tattoo')
-def izbrisi_tattoo():
-    tetovaze_id = request.query['tetovazeid']
+@app.route('/delete<delete:re:[0-9]+>')
+def izbrisi_tattoo(delete):
+    tetovaze_id = delete
     izbrisi_tetovazu(tetovaze_id)
     redirect('/tattoo')
+
+@app.route('/newTattoo')
+def newTattoo():
+    return template('newTattoo')
 
 run(app, host='localhost', port = 4040)
