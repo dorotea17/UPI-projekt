@@ -58,7 +58,7 @@
     </div>
     <div class="container">
         <div class="row" style="margin-top: 50px; padding-top: 30px; font-size: 20px;">
-            <form style="width: 100%">    
+        <form style="width: 100%" method="POST">    
         <label for="email">Email</label>
         <input type="email" class="form-control" id="email" name='email' placeholder="Unesite email..." required width="80%">
         <br>
