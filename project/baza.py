@@ -39,7 +39,7 @@ def unesi_demo_podatke():
     except Exception as e:
         print("Dogodila se greska pri kreiranju demo podataka: ",e)
         con.rollback()
-    con.close()
+
 
     # za tablicu osoblje
     try:
@@ -169,7 +169,7 @@ def sacuvaj_novu_tetovazu(naziv,velicina,vrijeme,cijena):
 
     con.close()
  
- def izbrisi_tetovazu(tetovaze_id):
+def izbrisi_tetovazu(tetovaze_id):
     con = sqlite3.connect("tattoo.db")
     try:
         cur = con.cursor()
@@ -184,9 +184,9 @@ def sacuvaj_novu_tetovazu(naziv,velicina,vrijeme,cijena):
 
     con.close()
 
- def dohvati_tetovazu_po_id(tetovaze_id):
-     con = sqlite3.connect("tattoo.db")
-     tetovaza = None
+def dohvati_tetovazu_po_id(tetovaze_id):
+    con = sqlite3.connect("tattoo.db")
+    tetovaza = None
     try:
 
         cur = con.cursor()
@@ -205,7 +205,7 @@ def sacuvaj_novu_tetovazu(naziv,velicina,vrijeme,cijena):
     con.close()
     return tetovaza  
 
- def azuriraj_tetovazu(tetovaze_id, naziv, velicina, vrijeme, cijena):
+def azuriraj_tetovazu(tetovaze_id, naziv, velicina, vrijeme, cijena):
     con = sqlite3.connect("tattoo.db")
     try:
 

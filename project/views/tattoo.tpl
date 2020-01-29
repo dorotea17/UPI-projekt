@@ -55,7 +55,7 @@
       </div>
     </div>
     <div class="row">
-      <table class="table">
+      <table class="table" style="background-color: white;">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -63,25 +63,26 @@
             <th scope="col">Veličina</th>
             <th scope="col">Vrijeme</th>
             <th scope="col">Cijena</th>
+            <th scope="col">Uredi</th>
+            <th scope="col">Izbriši</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody style="background-color: white;">
 
-          %for item in data:
-
+            %for item in data:
             <tr>
-              <th scope="row">{{item.id}}</th>
-              <td>{{item.naziv}}</td>
-              <td>{{item.velicina}}</td>
-              <td>{{item.vrijeme}}</td>
-              <td>{{item.cijena}}</td>
+              <th scope="row">{{item._id}}</th>
+              <td>{{item._naziv}}</td>
+              <td>{{item._velicina}}</td>
+              <td>{{item._vrijeme}}</td>
+              <td>{{item._cijena}}</td>
               <td>
-                <a href='#'>
+                <a href='/azuriraj-tattoo?tetovazeid={{item._id}}'>
                   <i class="fas fa-edit"></i>
                 </a>
               </td>
               <td>
-                <a href='#'>
+                <a href='/izbrisi-tattoo?tetovazeid={{item._id}}'>
                   <i class="fas fa-trash-alt"></i>
                 </a>
               </td>

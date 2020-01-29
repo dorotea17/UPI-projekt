@@ -59,13 +59,13 @@
                 <input type="text" class="form-control" id="naziv" name='naziv' value='{{data.naziv if data != None else ""}}' aria-describedby="naziv-help" placeholder="Unesite naziv" required>
             </div>
 
-            <div class="ui-field-contain">
-				<label for="velicina">Velicina</label><br>
+        <div class="ui-field-contain">
+				<label for="velicina">Veličina</label><br>
 				<select name="velicina" id="velicina">
 					<option value="{{data.velicina if data != None else 'mala'}}">Mala</option>
 					<option value="{{data.velicina if data != None else 'velika'}}">Velika</option>
 				</select>
-            </div>
+      </div>
             
             <div class="form-group">
                 <label for="vrijeme">Vrijeme</label>
