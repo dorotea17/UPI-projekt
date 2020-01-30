@@ -35,7 +35,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/tattoo">Tetovaže</a>
+            <a class="nav-link" href="/tetovaze">Tetovaže</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/contact">Kontakt</a>

@@ -443,3 +443,55 @@ def azuriraj_racun(racuni_id, datum, osoblje_id, tetovaze_id, ukupno):
         con.rollback()
 
     con.close()
+
+def velika_tetovaza():
+    con=sqlite3.connect("tattoo.db")
+    lista_velikih=[]
+    try:
+        cur=con.cursor()
+        cur.execute(""" SELECT id,link,naziv,velicina,vrijeme, cijena FROM tetovaze """)
+        
+        podaci=cur.fetchall()
+
+        for tat in podaci:
+            if (tat[3]=="velika"):
+                t=Tetovaze(tat[0],tat[1],tat[2],tat[3],tat[4],tat[5])
+                lista_velikih.append(t)
+
+        print ("Uspjesno dohvaceni svi podaci iz tablice racuna")
+
+        for t in lista_velikih:
+            print(t)
+        
+    except Exception as e:
+        print("Dogodila se greska pri dohvacanju svih podataka iz tablice racuna: ",e)
+        con.rollback()
+
+    con.close()
+    return lista_velikih
+
+def mala_tetovaza():
+    con=sqlite3.connect("tattoo.db")
+    lista_malih=[]
+    try:
+        cur=con.cursor()
+        cur.execute(""" SELECT id,link,naziv,velicina,vrijeme, cijena FROM tetovaze """)
+        
+        podaci=cur.fetchall()
+
+        for tat in podaci:
+            if (tat[3]=="mala"):
+                t=Tetovaze(tat[0],tat[1],tat[2],tat[3],tat[4],tat[5])
+                lista_malih.append(t)
+
+        print ("Uspjesno dohvaceni svi podaci iz tablice racuna")
+
+        for t in lista_malih:
+            print(t)
+        
+    except Exception as e:
+        print("Dogodila se greska pri dohvacanju svih podataka iz tablice racuna: ",e)
+        con.rollback()
+
+    con.close()
+    return lista_malih

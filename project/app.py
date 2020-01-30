@@ -198,4 +198,19 @@ def izbrisi_racun_():
     izbrisi_racun(racuni_id)
     redirect('/racuni')
 
+@app.route('/tetovaze')
+def tetovaze_():
+    podaci=procitaj_podatke_tetovaze()
+    return template('tetovaze', data=podaci, template_lookup=[template_path])
+
+@app.route('/velika')
+def velika_tetovaza_():
+    podaci=velika_tetovaza()
+    return template('tetovaze',data=podaci,template_lookup=[template_path])
+
+@app.route('/mala')
+def mala_tetovaza_():
+    podaci=mala_tetovaza()
+    return template('tetovaze',data=podaci,template_lookup=[template_path])
+        
 run(app, host='localhost', port = 4040)
