@@ -33,12 +33,12 @@
             </a>
             <div class="dropdown-menu">
               <a class="dropdown-item active" href="/tattoo">Tetovaže<span class="sr-only">(current)</span></a>
-              <a class="dropdown-item" href="#">Osoblje</a>
+              <a class="dropdown-item" href="/osoblje">Osoblje</a>
               <a class="dropdown-item" href="#">Računi</a>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Odjava</a>
+            <a class="nav-link" href="/index">Odjava</a>
               <span class="sr-only"></span>
             </a>
           </li>

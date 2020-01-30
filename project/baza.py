@@ -105,6 +105,7 @@ def unesi_demo_podatke():
         DROP TABLE IF EXISTS korisnik;
         
         CREATE TABLE korisnik (
+        id INTEGER PRIMARY KEY,
         e_mail email NOT NULL,
         lozinka password NOT NULL);
         """)
@@ -217,6 +218,104 @@ def azuriraj_tetovazu(tetovaze_id, naziv, velicina, vrijeme, cijena):
 
     except Exception as e: 
         print("Dogodila se greska pri ažuriranju tetovaze iz baze podataka: ", e)
+        con.rollback()
+
+    con.close()
+
+def procitaj_podatke_osoblja():
+    con=sqlite3.connect("tattoo.db")
+    lista_osoblja=[]
+    try:
+        cur=con.cursor()
+        cur.execute(""" SELECT id,ime,prezime,datumpocetkarada,brojtetovazaizradenih FROM osoblje """)
+        
+        podaci=cur.fetchall()
+
+        for osob in podaci:
+            # 0 - id
+            # 1 - ime
+            # 2 - prezime
+            # 3 - datum
+            # 4 - broj
+
+            o=Osoblje(osob[0],osob[1],osob[2],osob[3],osob[4])
+            lista_osoblja.append(o)
+
+        print ("Uspjesno dohvaceni svi podaci iz tablice osoblja")
+
+        for o in lista_osoblja:
+            print(o)
+        
+    except Exception as e:
+        print("Dogodila se greska pri dohvacanju svih podataka iz tablice osoblja: ",e)
+        con.rollback()
+
+    con.close()
+    return lista_osoblja
+
+def sacuvaj_novo_osoblje(ime,prezime,datumpocetkarada,brojtetovazaizradenih):
+    con=sqlite3.connect("tattoo.db")
+    try:
+        cur=con.cursor()
+        cur.execute("INSERT INTO osoblje (ime,prezime,datumpocetkarada,brojtetovazaizradenih) VALUES (?,?,?,?)",(ime,prezime,datumpocetkarada,brojtetovazaizradenih))
+        con.commit()
+
+        print("Uspjesno dodano novo osoblje u bazu podataka")
+    
+    except Exception as e:
+        print("Dogodila se greska pri dodavanju novog osoblja u bazu podataka: ",e)
+        con.rollback()
+
+    con.close()
+ 
+def izbrisi_osoblje(osoblje_id):
+    con = sqlite3.connect("tattoo.db")
+    try:
+        cur = con.cursor()
+        cur.execute("DELETE FROM osoblje WHERE id=?;", (osoblje_id))
+        con.commit()
+
+        print ("uspjesno izbrisano osoblje iz baze podataka")
+
+    except Exception as e:
+        print ("Dogodila se greska pri brisanju osoblja iz baze podataka: ", e)
+        con.rollback()
+
+    con.close()
+
+def dohvati_osoblje_po_id(osoblje_id):
+    con = sqlite3.connect("tattoo.db")
+    osoblje = None
+    try:
+
+        cur = con.cursor()
+        cur.execute("SELECT id, ime, prezime, datumpocetkarada, brojtetovazaizradenih FROM osoblje WHERE id=?", (osoblje_id))
+        podaci = cur.fetchone()
+
+        print ("podaci", podaci)
+        osoblje = Osoblje(podaci[0], podaci[1], podaci[2], podaci[3], podaci[4])
+
+        print("Uspjesno dohvaceno osoblje iz baze podataka po ID-u")
+
+    except Exception as e:
+        print ("Dogodila se greska pri dohvacanju osoblja iz baze podataka po ID-u: ", e)
+        con.rollback()
+
+    con.close()
+    return osoblje  
+
+def azuriraj_osoblje(osoblje_id, ime, prezime, datumpocetkarada, brojtetovazaizradenih):
+    con = sqlite3.connect("tattoo.db")
+    try:
+
+        cur = con.cursor()
+        cur.execute("UPDATE osoblje SET ime = ?, prezime = ?, datumpocetkarada = ?, brojtetovazaizradenih = ? WHERE id = ?", (ime, prezime, datumpocetkarada, brojtetovazaizradenih, osoblje_id))
+        con.commit()
+
+        print("uspjesno ažurirano osoblje iz baze podataka")
+
+    except Exception as e: 
+        print("Dogodila se greska pri ažuriranju osoblja iz baze podataka: ", e)
         con.rollback()
 
     con.close()

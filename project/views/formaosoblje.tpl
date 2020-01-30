@@ -33,7 +33,7 @@
             </a>
             <div class="dropdown-menu">
               <a class="dropdown-item active" href="/tattoo">Tetovaže<span class="sr-only">(current)</span></a>
-              <a class="dropdown-item" href="/osoblje">Osoblje</a>
+              <a class="dropdown-item" href="/osoblje"">Osoblje</a>
               <a class="dropdown-item" href="#">Računi</a>
             </div>
           </li>
@@ -49,54 +49,34 @@
 
   <!-- Page Content -->
   <div class="container">
-    <div class="row" style="padding:25px 0;">
-      <div class="col-md-2 text-center" style="padding: 0">
-        <a href='/nova-tattoo' class="btn btn-secondary">Dodaj novu tetovažu</a>
-      </div>
-    </div>
-    <div class="row">
-      <table class="table" style="background-color: white;">
-        <thead>
-          <tr>
-            <th scope="col">#</th>  
-            <th scope="col">Naziv</th>
-            <th scope="col">Veličina</th>
-            <th scope="col">Vrijeme</th>
-            <th scope="col">Cijena</th>
-            <th scope="col">Uredi</th>
-            <th scope="col">Izbriši</th>
-          </tr>
-        </thead>
-        <tbody style="background-color: white;">
+	<div class="row" style="margin-top: 50px;">
+        <form style="width: 100%" action='{{form_akcija}}' method='POST'>
 
-            %for item in data:
-            <tr>
-              <th scope="row">{{item._id}}</th>
-              <td>{{item._naziv}}</td>
-              <td>{{item._velicina}}</td>
-              <td>{{item._vrijeme}}</td>
-              <td>{{item._cijena}}</td>
-              <td>
-                <a href='/azuriraj-tattoo?tetovazeid={{item._id}}'>
-                  <i class="fas fa-edit"></i>
-                </a>
-              </td>
-              <td>
-                <a href='/izbrisi-tattoo?tetovazeid={{item._id}}'>
-                  <i class="fas fa-trash-alt"></i>
-                </a>
-              </td>
-            </tr>
+            <input type="hidden" class="form-control" id="osobljeid" name='osobljeid' value='{{data._id if data != None else ""}}'>
 
-            %end
-        </tbody>
-      </table>
+            <div class="form-group">
+                <label for="ime">Ime</label>
+                <input type="text" class="form-control" id="ime" name='ime' value='{{data._ime if data != None else ""}}' aria-describedby="ime-help" placeholder="Unesite ime" required>
+            </div>
+
+            <div class="form-group">
+              <label for="prezime">Prezime</label>
+              <input type="text" class="form-control" id="prezime" name='prezime' value='{{data._prezime if data != None else ""}}' aria-describedby="prezime-help" placeholder="Unesite prezime" required>
+          </div>
+            
+            <div class="form-group">
+                <label for="datumpocetkarada">Datum pocetka rada</label>
+                <input type="date" class="form-control" id="datumpocetkarada" name='datumpocetkarada' value='{{data._datumpocetkarada if data != None else ""}}' aria-describedby="datumpocetkarada-help" placeholder="Unesite datum pocetka rada" required>
+            </div>
+
+            <div class="form-group">
+                <label for="brojtetovazaizradenih">Broj tetovaza izradenih</label>
+                <input type="number" class="form-control" id="brojtetovazaizradenih" name='brojtetovazaizradenih' value='{{data._brojtetovazaizradenih if data != None else ""}}' aria-describedby="brojtetovazaizradenih-help" placeholder="Unesite broj izradenih tetovaza" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary" name="save">Sačuvaj</button>
+
+        </form>     
     </div>
-  </div>
-  
-	<script>
-		//example of calling custom function
-		helloWorld();
-	</script>
 </body>
 </html>

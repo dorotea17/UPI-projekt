@@ -51,7 +51,7 @@
   <div class="container">
     <div class="row" style="padding:25px 0;">
       <div class="col-md-2 text-center" style="padding: 0">
-        <a href='/nova-tattoo' class="btn btn-secondary">Dodaj novu tetovažu</a>
+        <a href='/novo-osoblje' class="btn btn-secondary">Dodaj novo osoblje</a>
       </div>
     </div>
     <div class="row">
@@ -59,10 +59,10 @@
         <thead>
           <tr>
             <th scope="col">#</th>  
-            <th scope="col">Naziv</th>
-            <th scope="col">Veličina</th>
-            <th scope="col">Vrijeme</th>
-            <th scope="col">Cijena</th>
+            <th scope="col">Ime</th>
+            <th scope="col">Prezime</th>
+            <th scope="col">Datum početka rada</th>
+            <th scope="col">Broj izrađenih tetovaža</th>
             <th scope="col">Uredi</th>
             <th scope="col">Izbriši</th>
           </tr>
@@ -72,17 +72,17 @@
             %for item in data:
             <tr>
               <th scope="row">{{item._id}}</th>
-              <td>{{item._naziv}}</td>
-              <td>{{item._velicina}}</td>
-              <td>{{item._vrijeme}}</td>
-              <td>{{item._cijena}}</td>
+              <td>{{item._ime}}</td>
+              <td>{{item._prezime}}</td>
+              <td>{{item._datumpocetkarada}}</td>
+              <td>{{item._brojtetovazaizradenih}}</td>
               <td>
-                <a href='/azuriraj-tattoo?tetovazeid={{item._id}}'>
+                <a href='/azuriraj-osoblje?osobljeid={{item._id}}'>
                   <i class="fas fa-edit"></i>
                 </a>
               </td>
               <td>
-                <a href='/izbrisi-tattoo?tetovazeid={{item._id}}'>
+                <a href='/izbrisi-osoblje?osobljeid={{item._id}}'>
                   <i class="fas fa-trash-alt"></i>
                 </a>
               </td>

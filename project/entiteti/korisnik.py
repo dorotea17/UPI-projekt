@@ -1,7 +1,12 @@
 class Korisnik():
-    def __init__(self,e_mail,lozinka):
+    def __init__(self, id, e_mail,lozinka):
+        self._id=id
         self._e_mail=e_mail
         self._lozinka=lozinka
+
+@property
+def id(self):
+    return self._id
 
 @property
 def e_mail(self):
@@ -13,7 +18,8 @@ def lozinka(self):
 
 def __str__(self):
     return """
-    e_mail:{0}
-    lozinka {1}
+    id: {0}
+    e_mail:{1}
+    lozinka {2}
     -------------
-    """.format(self._e_mail,self._lozinka)
+    """.format(self._id,self._e_mail,self._lozinka)

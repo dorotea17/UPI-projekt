@@ -3,10 +3,9 @@ from bottle import Bottle, run, \
 
 import os, sys
 
-from baza import unesi_demo_podatke,procitaj_podatke_tetovaze,sacuvaj_novu_tetovazu,dohvati_tetovazu_po_id,azuriraj_tetovazu,izbrisi_tetovazu
+from baza import *
 
 unesi_demo_podatke()
-procitaj_podatke_tetovaze()
 dirname = os.path.dirname(sys.argv[0])
 template_path=dirname+'\\views'
 app = Bottle()
@@ -46,10 +45,6 @@ def contact():
 def tattoo():
     podaci=procitaj_podatke_tetovaze()
     return template('tattoo', data=podaci, template_lookup=[template_path])
-
-@app.route('/signin')
-def signin():
-    return template('signin')
 
 @app.route('/nova-tattoo')
 def nova_tetovaza():
@@ -91,5 +86,54 @@ def izbrisi_tattoo():
     tetovaze_id = request.query['tetovazeid']
     izbrisi_tetovazu(tetovaze_id)
     redirect('/tattoo')
+
+@app.route('/signin')
+def signin():
+    return template('signin')
+
+@app.route('/osoblje')
+def osoblje():
+    podaci=procitaj_podatke_osoblja()
+    return template('osoblje', data=podaci, template_lookup=[template_path])
+
+@app.route('/novo-osoblje')
+def novo_osoblje():
+    return template('formaosoblje',data=None,form_akcija="/spremi-osoblje",template_lookup=[template_path])
+
+@app.route('/spremi-osoblje', method='POST')
+def spremi_osoblje():
+    postdata=request.body.read()
+
+    ime=request.forms.get("ime")
+    prezime=request.forms.get("prezime")
+    datumpocetkarada=request.forms.get("datumpocetkarada")
+    brojtetovazaizradenih=int(request.forms.get("brojtetovazaizradenih"))
+
+    sacuvaj_novo_osoblje(ime,prezime,datumpocetkarada,brojtetovazaizradenih)
+
+    redirect('/osoblje')
+
+@app.route('/azuriraj-osoblje')
+def azuriraj_osoblje_():
+    osoblje_id=request.query['osobljeid']
+    osoblje=dohvati_osoblje_po_id(osoblje_id)
+    return template('formaosoblje',data=osoblje, form_akcija="/azuriraj-osoblje-save",template_lookup=[template_path])
+
+@app.route('/azuriraj-osoblje-save',method='POST')
+def azuriraj_osoblje_save():
+    osoblje_id=request.forms.get("osobljeid")
+    ime=request.forms.get("ime")
+    prezime=request.forms.get("prezime")
+    datumpocetkarada=request.forms.get("datumpocetkarada")
+    brojtetovazaizradenih=int(request.forms.get("brojtetovazaizradenih"))
+
+    azuriraj_osoblje(osoblje_id,ime,prezime,datumpocetkarada,brojtetovazaizradenih)
+    redirect('/osoblje')
+
+@app.route('/izbrisi-osoblje')
+def izbrisi_osoblje_():
+    osoblje_id = request.query['osobljeid']
+    izbrisi_osoblje(osoblje_id)
+    redirect('/osoblje')
 
 run(app, host='localhost', port = 4040)
