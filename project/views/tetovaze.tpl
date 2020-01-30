@@ -66,15 +66,7 @@
                 <li><a href="/mala">Mala</a></li>
             </th>
             <th scope="col">Vrijeme</th>
-            <th scope="col">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">Cijena
-                    <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                      <li><a href="#">Od manje</a></li>
-                      <li><a href="#">Od više</a></li>
-                    </ul>
-                  </div>
+            <th scope="col">Cijena
             </th>
           </tr>
         </thead>
