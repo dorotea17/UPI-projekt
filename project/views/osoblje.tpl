@@ -32,9 +32,9 @@
               Tattoo Studio
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item active" href="/tattoo">Tetovaže<span class="sr-only">(current)</span></a>
-              <a class="dropdown-item" href="/osoblje">Osoblje</a>
-              <a class="dropdown-item" href="#">Računi</a>
+              <a class="dropdown-item" href="/tattoo">Tetovaže</a>
+              <a class="dropdown-item active" href="/osoblje">Osoblje<span class="sr-only">(current)</span></a>
+              <a class="dropdown-item" href="/racuni">Računi</a>
             </div>
           </li>
           <li class="nav-item">

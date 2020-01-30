@@ -32,9 +32,9 @@
               Tattoo Studio
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item active" href="/tattoo">Tetovaže<span class="sr-only">(current)</span></a>
+              <a class="dropdown-item" href="/tattoo">Tetovaže</a>
               <a class="dropdown-item" href="/osoblje">Osoblje</a>
-              <a class="dropdown-item" href="/racuni">Računi</a>
+              <a class="dropdown-item active" href="/racuni">Računi<span class="sr-only">(current)</a>
             </div>
           </li>
           <li class="nav-item">
@@ -52,31 +52,26 @@
 	<div class="row" style="margin-top: 50px;">
         <form style="width: 100%" action='{{form_akcija}}' method='POST'>
 
-            <input type="hidden" class="form-control" id="tetovazeid" name='tetovazeid' value='{{data._id if data != None else ""}}'>
+            <input type="hidden" class="form-control" id="racuniid" name='racuniid' value='{{data._id if data != None else ""}}'>
 
             <div class="form-group">
-              <label for="link">Slika</label>
-              <input type="text" class="form-control" id="link" name='link' value='{{data._link if data != None else ""}}' aria-describedby="link-help" placeholder="Unesite link" required>
+                <label for="datum">Datum</label>
+                <input type="date" class="form-control" id="datum" name='datum' value='{{data._datum if data != None else ""}}' aria-describedby="datum-help" placeholder="Unesite datum" required>
             </div>
 
             <div class="form-group">
-                <label for="naziv">Naziv</label>
-                <input type="text" class="form-control" id="naziv" name='naziv' value='{{data._naziv if data != None else ""}}' aria-describedby="naziv-help" placeholder="Unesite naziv" required>
-            </div>
-
-            <div class="form-group">
-              <label for="velicina">Veličina</label>
-              <input type="text" class="form-control" id="velicina" name='velicina' value='{{data._velicina if data != None else ""}}' aria-describedby="velicina-help" placeholder="Unesite velicinu" required>
+              <label for="osoblje_id">Osoblje</label>
+              <input type="number" class="form-control" id="osoblje_id" name='osoblje_id' value='{{data._osoblje_id if data != None else ""}}' aria-describedby="osoblje_id-help" placeholder="Unesite id osoblja" required>
           </div>
             
             <div class="form-group">
-                <label for="vrijeme">Vrijeme</label>
-                <input type="number" class="form-control" id="vrijeme" name='vrijeme' value='{{data._vrijeme if data != None else ""}}' aria-describedby="vrijeme-help" placeholder="Unesite vrijeme" required>
+                <label for="tetovaze_id">Tetovaze</label>
+                <input type="number" class="form-control" id="tetovaze_id" name='tetovaze_id' value='{{data._tetovaze_id if data != None else ""}}' aria-describedby="tetovaze_id-help" placeholder="Unesite id tetovaze" required>
             </div>
 
             <div class="form-group">
-                <label for="cijena">Cijena</label>
-                <input type="number" class="form-control" id="cijena" name='cijena' value='{{data._cijena if data != None else ""}}' aria-describedby="cijena-help" placeholder="Unesite cijenu" required>
+                <label for="ukupno">Ukupno</label>
+                <input type="number" class="form-control" id="ukupno" name='ukupno' value='{{data._ukupno if data != None else ""}}' aria-describedby="ukupno-help" placeholder="Unesite ukupan iznos" required>
             </div>
 
             <button type="submit" class="btn btn-primary" name="save">Sačuvaj</button>

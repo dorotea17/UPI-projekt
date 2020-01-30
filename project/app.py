@@ -54,12 +54,13 @@ def nova_tetovaza():
 def spremi_tattoo():
     postdata=request.body.read()
 
+    link=request.forms.get("link")
     naziv=request.forms.get("naziv")
     velicina=request.forms.get("velicina")
     vrijeme=int(request.forms.get("vrijeme"))
     cijena=int(request.forms.get("cijena"))
 
-    sacuvaj_novu_tetovazu(naziv,velicina,vrijeme,cijena)
+    sacuvaj_novu_tetovazu(link,naziv,velicina,vrijeme,cijena)
 
     redirect('/tattoo')
 
@@ -72,13 +73,14 @@ def azuriraj_tattoo():
 @app.route('/azuriraj-tattoo-save',method='POST')
 def azuriraj_tattoo_save():
     tetovaze_id=request.forms.get("tetovazeid")
+    link=request.forms.get("link")
     naziv=request.forms.get("naziv")
     velicina=request.forms.get("velicina")
     vrijeme=int(request.forms.get("vrijeme"))
     cijena=int(request.forms.get("cijena"))
 
 
-    azuriraj_tetovazu(tetovaze_id,naziv,velicina,vrijeme,cijena)
+    azuriraj_tetovazu(tetovaze_id,link,naziv,velicina,vrijeme,cijena)
     redirect('/tattoo')
 
 @app.route('/izbrisi-tattoo')
@@ -123,8 +125,8 @@ def spremi_osoblje():
     prezime=request.forms.get("prezime")
     datumpocetkarada=request.forms.get("datumpocetkarada")
     brojtetovazaizradenih=int(request.forms.get("brojtetovazaizradenih"))
-
-    sacuvaj_novo_osoblje(ime,prezime,datumpocetkarada,brojtetovazaizradenih)
+    korisnik_id=int(request.forms.get("korisnik_id"))
+    sacuvaj_novo_osoblje(ime,prezime,datumpocetkarada,brojtetovazaizradenih,korisnik_id)
 
     redirect('/osoblje')
 
@@ -141,8 +143,9 @@ def azuriraj_osoblje_save():
     prezime=request.forms.get("prezime")
     datumpocetkarada=request.forms.get("datumpocetkarada")
     brojtetovazaizradenih=int(request.forms.get("brojtetovazaizradenih"))
+    korisnik_id=int(request.forms.get("korisnik_id"))
 
-    azuriraj_osoblje(osoblje_id,ime,prezime,datumpocetkarada,brojtetovazaizradenih)
+    azuriraj_osoblje(osoblje_id,ime,prezime,datumpocetkarada,brojtetovazaizradenih,korisnik_id)
     redirect('/osoblje')
 
 @app.route('/izbrisi-osoblje')
@@ -150,5 +153,49 @@ def izbrisi_osoblje_():
     osoblje_id = request.query['osobljeid']
     izbrisi_osoblje(osoblje_id)
     redirect('/osoblje')
+
+@app.route('/racuni')
+def racuni():
+    podaci=procitaj_podatke_racuna()
+    return template('racuni', data=podaci, template_lookup=[template_path])
+
+@app.route('/novi-racun')
+def novi_racun():
+    return template('formaracuni',data=None,form_akcija="/spremi-racun",template_lookup=[template_path])
+
+@app.route('/spremi-racun', method='POST')
+def spremi_racun_():
+    postdata=request.body.read()
+
+    datum=request.forms.get("datum")
+    osoblje_id=int(request.forms.get("osoblje_id"))
+    tetovaze_id=int(request.forms.get("tetovaze_id"))
+    ukupno=int(request.forms.get("ukupno"))
+    sacuvaj_novi_racun(datum,osoblje_id,tetovaze_id,ukupno)
+
+    redirect('/racuni')
+
+@app.route('/azuriraj-racun')
+def azuriraj_racun_():
+    racuni_id=request.query['racuniid']
+    racuni=dohvati_racun_po_id(racuni_id)
+    return template('formaracuni',data=racuni, form_akcija="/azuriraj-racun-save",template_lookup=[template_path])
+
+@app.route('/azuriraj-racun-save',method='POST')
+def azuriraj_racun_save():
+    racuni_id=request.forms.get("racuniid")
+    datum=request.forms.get("datum")
+    osoblje_id=int(request.forms.get("osoblje_id"))
+    tetovaze_id=int(request.forms.get("tetovaze_id"))
+    ukupno=int(request.forms.get("ukupno"))
+
+    azuriraj_racun(racuni_id,datum,osoblje_id,tetovaze_id,ukupno)
+    redirect('/racuni')
+
+@app.route('/izbrisi-racun')
+def izbrisi_racun_():
+    racuni_id = request.query['racuniid']
+    izbrisi_racun(racuni_id)
+    redirect('/racuni')
 
 run(app, host='localhost', port = 4040)

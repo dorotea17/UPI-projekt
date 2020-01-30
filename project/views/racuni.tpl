@@ -32,9 +32,9 @@
               Tattoo Studio
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item active" href="/tattoo">Tetovaže<span class="sr-only">(current)</span></a>
+              <a class="dropdown-item" href="/tattoo">Tetovaže</a>
               <a class="dropdown-item" href="/osoblje">Osoblje</a>
-              <a class="dropdown-item" href="/racuni">Računi</a>
+              <a class="dropdown-item active" href="/racuni">Računi<span class="sr-only">(current)</span></a>
             </div>
           </li>
           <li class="nav-item">
@@ -51,7 +51,7 @@
   <div class="container">
     <div class="row" style="padding:25px 0;">
       <div class="col-md-2 text-center" style="padding: 0">
-        <a href='/nova-tattoo' class="btn btn-secondary">Dodaj novu tetovažu</a>
+        <a href='/novi-racun' class="btn btn-secondary">Dodaj novi racun</a>
       </div>
     </div>
     <div class="row">
@@ -59,11 +59,10 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Slika</th>  
-            <th scope="col">Naziv</th>
-            <th scope="col">Veličina</th>
-            <th scope="col">Vrijeme</th>
-            <th scope="col">Cijena</th>
+            <th scope="col">Datum</th>  
+            <th scope="col">Osoblje</th>
+            <th scope="col">Tetovaže</th>
+            <th scope="col">Ukupno</th>
             <th scope="col">Uredi</th>
             <th scope="col">Izbriši</th>
           </tr>
@@ -73,18 +72,17 @@
             %for item in data:
             <tr>
               <th scope="row">{{item._id}}</th>
-              <td><img src="{{item._link}}" height="80px" width="80px"></td>
-              <td>{{item._naziv}}</td>
-              <td>{{item._velicina}}</td>
-              <td>{{item._vrijeme}}</td>
-              <td>{{item._cijena}}</td>
+              <td>{{item._datum}}</td>
+              <td>{{item._osoblje_id}}</td>
+              <td>{{item._tetovaze_id}}</td>
+              <td>{{item._ukupno}}</td>
               <td>
-                <a href='/azuriraj-tattoo?tetovazeid={{item._id}}'>
+                <a href='/azuriraj-racun?racuniid={{item._id}}'>
                   <i class="fas fa-edit"></i>
                 </a>
               </td>
               <td>
-                <a href='/izbrisi-tattoo?tetovazeid={{item._id}}'>
+                <a href='/izbrisi-racun?racuniid={{item._id}}'>
                   <i class="fas fa-trash-alt"></i>
                 </a>
               </td>

@@ -32,9 +32,9 @@
               Tattoo Studio
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item active" href="/tattoo">Tetovaže<span class="sr-only">(current)</span></a>
-              <a class="dropdown-item" href="/osoblje">Osoblje</a>
-              <a class="dropdown-item" href="#">Računi</a>
+              <a class="dropdown-item" href="/tattoo">Tetovaže</a>
+              <a class="dropdown-item active" href="/osoblje">Osoblje<span class="sr-only">(current)</span></a>
+              <a class="dropdown-item" href="/racuni">Računi</a>
             </div>
           </li>
           <li class="nav-item">
@@ -73,6 +73,11 @@
                 <label for="brojtetovazaizradenih">Broj tetovaza izradenih</label>
                 <input type="number" class="form-control" id="brojtetovazaizradenih" name='brojtetovazaizradenih' value='{{data._brojtetovazaizradenih if data != None else ""}}' aria-describedby="brojtetovazaizradenih-help" placeholder="Unesite broj izradenih tetovaza" required>
             </div>
+
+            <div class="form-group">
+              <label for="korisnik_id">Id korisnika</label>
+              <input type="number" class="form-control" id="korisnik_id" name='korisnik_id' value='{{data._korisnik_id if data != None else ""}}' aria-describedby="korisnik_id-help" placeholder="Unesite id korisnika" required>
+          </div>
 
             <button type="submit" class="btn btn-primary" name="save">Sačuvaj</button>
 
