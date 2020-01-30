@@ -5,7 +5,11 @@ import os, sys
 
 from baza import *
 
-unesi_demo_podatke()
+# unesi_demo_podatke()
+procitaj_podatke_tetovaze()
+procitaj_podatke_racuna()
+procitaj_podatke_osoblja()
+procitaj_podatke_korisnik()
 dirname = os.path.dirname(sys.argv[0])
 template_path=dirname+'\\views'
 app = Bottle()
