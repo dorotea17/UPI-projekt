@@ -9,6 +9,55 @@ body{
 	color: #ffffff;	
 }
 
+li{
+	list-style: none;
+}
+
+button{
+	cursor: pointer;
+}
+
+.filter{
+	width: 100px;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+	border-radius: 20px;
+	background:inherit
+}
+
+.dropdown{
+	display: inline-block;
+}
+
+.dropdownContent{
+	display: none;
+	position: absolute;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+	background-color: lightgrey;
+	border-radius: 20px;
+}
+
+.dropdownContent a{
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+	border-radius: 20px;
+}
+
+.dropdownContent a:hover{
+	background-color: #fff;
+}
+
+.dropdown:hover .dropdownContent{
+	display: block;
+}
+
+
+
 .jumbotron{
 	color: black;
 	margin: 15px;

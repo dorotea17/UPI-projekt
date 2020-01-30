@@ -217,4 +217,4 @@ def mala_tetovaza_():
     podaci=mala_tetovaza()
     return template('tetovaze',data=podaci,template_lookup=[template_path])
         
-run(app, host='localhost', port = 4040)
+run(app, host='localhost', port = 1212)

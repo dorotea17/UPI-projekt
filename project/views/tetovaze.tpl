@@ -61,10 +61,15 @@
           <tr>
             <th scope="col">Slika</th>  
             <th scope="col">Naziv</th>
-            <th scope="col"><a href="/tetovaze">Veličina</a><br>
-                <li><a href="/velika">Velika</a></li>
-                <li><a href="/mala">Mala</a></li>
-            </th>
+            <th scope="col"> 
+              <div class="dropdown">
+                <p class="filter">Veličina</p>
+                <div class="dropdownContent">
+                  <li><a href="/velika">Velika</a></li>
+                  <li><a href="/mala">Mala</a></li>
+                </div>
+              </th>
+              </div>
             <th scope="col">Vrijeme</th>
             <th scope="col">Cijena
             </th>
