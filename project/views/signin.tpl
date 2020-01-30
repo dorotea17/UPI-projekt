@@ -58,16 +58,16 @@
     </div>
     <div class="container">
         <div class="row" style="margin-top: 50px; padding-top: 30px; font-size: 20px;">
-        <form style="width: 100%" method="POST">    
+        <form style="width: 100%" action='{{form_akcija}}' method="POST">    
         <label for="e_mail">Email</label>
         <input type="email" class="form-control" id="e_mail" name='e_mail' placeholder="Unesite email..." required width="80%">
         <br>
         <label for="lozinka">Lozinka</label>
         <input type="password" class="form-control" id="lozinka" name='lozinka' placeholder="Unesite lozinku..." required width="80%">
-        </form>
+        <button class="btn btn-secondary" type="submit" style="width:120px;height:40px;margin-top: 20px;">Login</button><br><br>
+      </form>
         </div>
     </div>
-    <button class="btn btn-secondary" type="submit" style="width:120px;height:40px;margin-top: 20px;">Login</button><br><br>
 
   </div>
 </div>

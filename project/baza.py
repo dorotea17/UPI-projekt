@@ -319,3 +319,32 @@ def azuriraj_osoblje(osoblje_id, ime, prezime, datumpocetkarada, brojtetovazaizr
         con.rollback()
 
     con.close()
+
+def procitaj_podatke_korisnik():
+    con=sqlite3.connect("tattoo.db")
+    lista_korisnika=[]
+    try:
+        cur=con.cursor()
+        cur.execute(""" SELECT id,e_mail,lozinka FROM korisnik """)
+        
+        podaci=cur.fetchall()
+
+        for kor in podaci:
+            # 0 - id
+            # 1 - e_mail
+            # 2 - lozinka
+
+            k=Korisnik(kor[0],kor[1],kor[2])
+            lista_korisnika.append(k)
+
+        print ("Uspjesno dohvaceni svi podaci iz tablice korisnika")
+
+        for k in lista_korisnika:
+            print(k)
+        
+    except Exception as e:
+        print("Dogodila se greska pri dohvacanju svih podataka iz tablice korisnika: ",e)
+        con.rollback()
+
+    con.close()
+    return lista_korisnika

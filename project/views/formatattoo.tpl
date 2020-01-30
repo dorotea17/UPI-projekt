@@ -38,7 +38,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/index">Odjava</a>
+            <a class="nav-link" href="/">Odjava</a>
               <span class="sr-only"></span>
             </a>
           </li>

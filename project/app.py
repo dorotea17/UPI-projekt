@@ -89,7 +89,22 @@ def izbrisi_tattoo():
 
 @app.route('/signin')
 def signin():
-    return template('signin')
+    return template('signin',data=None,form_akcija="/provjera",template_lookup=[template_path])
+
+@app.route('/provjera',method='POST')
+def provjera():
+    postdata=request.body.read()
+    e_mail=request.forms.get("e_mail")
+    lozinka=str(request.forms.get("lozinka"))
+    svi_korisnici=procitaj_podatke_korisnik()
+    for korisnik in svi_korisnici:
+        if (korisnik._e_mail==e_mail):
+            if (korisnik._lozinka==lozinka):
+                tetovaze=procitaj_podatke_tetovaze()
+                return template('tattoo',data=tetovaze,template_lookup=[template_path])
+
+            else:
+                return template('signin',form_akcija='provjera',template_lookup=[template_path])
 
 @app.route('/osoblje')
 def osoblje():
