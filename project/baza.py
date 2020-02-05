@@ -49,8 +49,7 @@ def unesi_demo_podatke():
         """)
         print("Uspjesno kreirana tablica korisnik")
 
-        cur.execute("INSERT INTO korisnik (e_mail, lozinka) VALUES (?,?)", ("ikonta@pmfst.hr","ikonta"))
-        cur.execute("INSERT INTO korisnik (e_mail, lozinka) VALUES (?,?)", ("dbertovic@pmfst.hr","dbertovic"))
+        cur.execute("INSERT INTO korisnik (e_mail, lozinka) VALUES (?,?)", ("korisnik@pmfst.hr","korisnik"))
         con.commit()
 
         print("Uspjesno uneseni testni podaci u tablicu korisnik")
@@ -73,13 +72,13 @@ def unesi_demo_podatke():
         prezime text NOT NULL,
         datumpocetkarada date NOT NULL,
         brojtetovazaizradenih integer NOT NULL,
-        korisnik_id integer NOT NULL,
-        FOREIGN KEY (korisnik_id) REFERENCES korisnik (id));
+        e_mail email NOT NULL,
+        lozinka password NOT NULL);
         """)
         print("Uspjesno kreirana tablica osoblje")
 
-        cur.execute("INSERT INTO osoblje (ime,prezime,datumpocetkarada,brojtetovazaizradenih,korisnik_id) VALUES (?,?,?,?,?)",("Ivana","Konta","2020-01-01",4,1))
-        cur.execute("INSERT INTO osoblje (ime,prezime,datumpocetkarada,brojtetovazaizradenih,korisnik_id) VALUES (?,?,?,?,?)",("Dorotea","Bertović","2019-12-07",7,2))
+        cur.execute("INSERT INTO osoblje (ime,prezime,datumpocetkarada,brojtetovazaizradenih,e_mail,lozinka) VALUES (?,?,?,?,?,?)",("Ivana","Konta","2020-01-01",4,"ikonta@pmfst.hr","ikonta"))
+        cur.execute("INSERT INTO osoblje (ime,prezime,datumpocetkarada,brojtetovazaizradenih,e_mail,lozinka) VALUES (?,?,?,?,?,?)",("Dorotea","Bertović","2019-12-07",7,"dbertovic@pmfst.hr","dbertovic"))
         con.commit()
 
         print("Uspjesno uneseni testni podaci u tablicu osoblje")
@@ -223,7 +222,7 @@ def procitaj_podatke_osoblja():
     lista_osoblja=[]
     try:
         cur=con.cursor()
-        cur.execute(""" SELECT id,ime,prezime,datumpocetkarada,brojtetovazaizradenih,korisnik_id FROM osoblje """)
+        cur.execute(""" SELECT id,ime,prezime,datumpocetkarada,brojtetovazaizradenih,e_mail,lozinka FROM osoblje """)
         
         podaci=cur.fetchall()
 
@@ -233,9 +232,10 @@ def procitaj_podatke_osoblja():
             # 2 - prezime
             # 3 - datum
             # 4 - broj
-            # 5 - korisnik_id
+            # 5 - e_mail
+            # 6 - lozinka
 
-            o=Osoblje(osob[0],osob[1],osob[2],osob[3],osob[4],osob[5])
+            o=Osoblje(osob[0],osob[1],osob[2],osob[3],osob[4],osob[5],osob[6])
             lista_osoblja.append(o)
 
         print ("Uspjesno dohvaceni svi podaci iz tablice osoblja")
@@ -250,11 +250,11 @@ def procitaj_podatke_osoblja():
     con.close()
     return lista_osoblja
 
-def sacuvaj_novo_osoblje(ime,prezime,datumpocetkarada,brojtetovazaizradenih,korisnik_id):
+def sacuvaj_novo_osoblje(ime,prezime,datumpocetkarada,brojtetovazaizradenih,e_mail,lozinka):
     con=sqlite3.connect("tattoo.db")
     try:
         cur=con.cursor()
-        cur.execute("INSERT INTO osoblje (ime,prezime,datumpocetkarada,brojtetovazaizradenih,korisnik_id) VALUES (?,?,?,?,?)",(ime,prezime,datumpocetkarada,brojtetovazaizradenih,korisnik_id))
+        cur.execute("INSERT INTO osoblje (ime,prezime,datumpocetkarada,brojtetovazaizradenih,e_mail,lozinka) VALUES (?,?,?,?,?,?)",(ime,prezime,datumpocetkarada,brojtetovazaizradenih,e_mail,lozinka))
         con.commit()
 
         print("Uspjesno dodano novo osoblje u bazu podataka")
@@ -286,11 +286,11 @@ def dohvati_osoblje_po_id(osoblje_id):
     try:
 
         cur = con.cursor()
-        cur.execute("SELECT id, ime, prezime, datumpocetkarada, brojtetovazaizradenih, korisnik_id FROM osoblje WHERE id=?", (osoblje_id))
+        cur.execute("SELECT id, ime, prezime, datumpocetkarada, brojtetovazaizradenih, e_mail, lozinka FROM osoblje WHERE id=?", (osoblje_id))
         podaci = cur.fetchone()
 
         print ("podaci", podaci)
-        osoblje = Osoblje(podaci[0], podaci[1], podaci[2], podaci[3], podaci[4], podaci[5])
+        osoblje = Osoblje(podaci[0], podaci[1], podaci[2], podaci[3], podaci[4], podaci[5], podaci[6])
 
         print("Uspjesno dohvaceno osoblje iz baze podataka po ID-u")
 
@@ -301,12 +301,12 @@ def dohvati_osoblje_po_id(osoblje_id):
     con.close()
     return osoblje  
 
-def azuriraj_osoblje(osoblje_id, ime, prezime, datumpocetkarada, brojtetovazaizradenih, korisnik_id):
+def azuriraj_osoblje(osoblje_id, ime, prezime, datumpocetkarada, brojtetovazaizradenih, e_mail, lozinka):
     con = sqlite3.connect("tattoo.db")
     try:
 
         cur = con.cursor()
-        cur.execute("UPDATE osoblje SET ime = ?, prezime = ?, datumpocetkarada = ?, brojtetovazaizradenih = ?, korisnik_id = ? WHERE id = ?", (ime, prezime, datumpocetkarada, brojtetovazaizradenih, korisnik_id, osoblje_id))
+        cur.execute("UPDATE osoblje SET ime = ?, prezime = ?, datumpocetkarada = ?, brojtetovazaizradenih = ?, e_mail = ?, lozinka = ? WHERE id = ?", (ime, prezime, datumpocetkarada, brojtetovazaizradenih, e_mail, lozinka, osoblje_id))
         con.commit()
 
         print("uspjesno ažurirano osoblje iz baze podataka")
@@ -345,6 +345,35 @@ def procitaj_podatke_korisnik():
 
     con.close()
     return lista_korisnika
+
+def procitaj_osoblje():
+    con=sqlite3.connect("tattoo.db")
+    lista_osoblja=[]
+    try:
+        cur=con.cursor()
+        cur.execute(""" SELECT id,e_mail,lozinka FROM osoblje """)
+        
+        podaci=cur.fetchall()
+
+        for osob in podaci:
+            # 0 - id
+            # 1 - e_mail
+            # 2 - lozinka
+
+            o=Osoblje(osob[0],osob[1],osob[2])
+            lista_osoblja.append(o)
+
+        print ("Uspjesno dohvaceni svi podaci iz tablice korisnika")
+
+        for o in lista_osoblja:
+            print(o)
+        
+    except Exception as e:
+        print("Dogodila se greska pri dohvacanju svih podataka iz tablice korisnika: ",e)
+        con.rollback()
+
+    con.close()
+    return lista_osoblja
 
 def procitaj_podatke_racuna():
     con=sqlite3.connect("tattoo.db")

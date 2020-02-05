@@ -39,11 +39,15 @@
               <li class="nav-item">
                 <a class="nav-link" href="/contact">Kontakt</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/signin">Prijava
-                  <span class="sr-only"></span>
-                </a>
-              </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              Prijava
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/signin">Sign in</a>
+              <a class="dropdown-item" href="/signup">Sign up</a>
+            </div>
+          </li>
             </ul>
           </div>
         </div>
@@ -51,7 +55,7 @@
 
   <!-- Page Content -->
   <div class="container">
-    <div class="row" style="padding:25px 0;">
+    <div class="row" style="padding:10px 0; margin-top: 90px;">
       <div class="col-md-2 text-center" style="padding: 0">
       </div>
   </div>
@@ -61,15 +65,15 @@
           <tr>
             <th scope="col">Slika</th>  
             <th scope="col">Naziv</th>
-            <th scope="col"> 
-              <div class="dropdown">
-                <p class="filter">Veličina</p>
-                <div class="dropdownContent">
+            <th scope="col" style="padding:0%; margin:0%; border:0%;"> 
+              <div class="dropdown" style="padding: 0%; margin: 0px; border: 0%;">
+                <p class="filter"><a href="/tetovaze">Veličina</a></p>
+                <div class="dropdownContent" style="padding:0%; margin: 0%; border: 0%;">
                   <li><a href="/velika">Velika</a></li>
                   <li><a href="/mala">Mala</a></li>
                 </div>
-              </th>
               </div>
+              </th>
             <th scope="col">Vrijeme</th>
             <th scope="col">Cijena
             </th>
@@ -82,7 +86,7 @@
               <td><img src="{{item._link}}" height="200px" width="200px"></td>
               <td>{{item._naziv}}</td>
               <td>{{item._velicina}}</td>
-              <td>{{item._vrijeme}}</td>
+              <td>{{item._vrijeme}} min</td>
               <td>{{item._cijena}}</td>
             </tr>
 
@@ -95,6 +99,6 @@
 	<script>
 		//example of calling custom function
 		helloWorld();
-	</script>
+  </script>
 </body>
 </html>

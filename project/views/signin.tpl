@@ -40,10 +40,14 @@
           <li class="nav-item">
             <a class="nav-link" href="/contact">Kontakt</a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/signin">Prijava
-              <span class="sr-only">(current)</span>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              Prijava
             </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item active" href="/signin">Sign in<span class="sr-only">(current)</span></a>
+              <a class="dropdown-item" href="/signup">Sign up</a>
+            </div>
           </li>
         </ul>
       </div>

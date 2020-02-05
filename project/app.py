@@ -103,14 +103,24 @@ def provjera():
     e_mail=request.forms.get("e_mail")
     lozinka=str(request.forms.get("lozinka"))
     svi_korisnici=procitaj_podatke_korisnik()
+    cijelo_osoblje=procitaj_osoblje()
     for korisnik in svi_korisnici:
         if (korisnik._e_mail==e_mail):
             if (korisnik._lozinka==lozinka):
-                tetovaze=procitaj_podatke_tetovaze()
-                return template('tattoo',data=tetovaze,template_lookup=[template_path])
-
+                return template('about',data=None,template_lookup=[template_path])
             else:
-                return template('signin',form_akcija='provjera',template_lookup=[template_path])
+                for osoblje in cijelo_osoblje:
+                    if (osoblje._e_mail==e_mail):
+                        if (osoblje._lozinka==lozinka):
+                            tetovaze=procitaj_podatke_tetovaze()
+                            return template('tattoo',data=tetovaze,template_lookup=[template_path])
+                        else:
+                            return template('signup',form_akcija="/provjera",template_lookup=[template_path])
+
+@app.route('/signup')
+def signup():
+    redirect ('/tetovaze')
+
 
 @app.route('/osoblje')
 def osoblje():
@@ -129,8 +139,9 @@ def spremi_osoblje():
     prezime=request.forms.get("prezime")
     datumpocetkarada=request.forms.get("datumpocetkarada")
     brojtetovazaizradenih=int(request.forms.get("brojtetovazaizradenih"))
-    korisnik_id=int(request.forms.get("korisnik_id"))
-    sacuvaj_novo_osoblje(ime,prezime,datumpocetkarada,brojtetovazaizradenih,korisnik_id)
+    e_mail=request.forms.get("e_mail")
+    lozinka=str(request.forms.get("lozinka"))
+    sacuvaj_novo_osoblje(ime,prezime,datumpocetkarada,brojtetovazaizradenih,e_mail,lozinka)
 
     redirect('/osoblje')
 
@@ -147,9 +158,10 @@ def azuriraj_osoblje_save():
     prezime=request.forms.get("prezime")
     datumpocetkarada=request.forms.get("datumpocetkarada")
     brojtetovazaizradenih=int(request.forms.get("brojtetovazaizradenih"))
-    korisnik_id=int(request.forms.get("korisnik_id"))
+    e_mail=request.forms.get("e_mail")
+    lozinka=str(request.forms.get("lozinka"))
 
-    azuriraj_osoblje(osoblje_id,ime,prezime,datumpocetkarada,brojtetovazaizradenih,korisnik_id)
+    azuriraj_osoblje(osoblje_id,ime,prezime,datumpocetkarada,brojtetovazaizradenih,e_mail,lozinka)
     redirect('/osoblje')
 
 @app.route('/izbrisi-osoblje')
