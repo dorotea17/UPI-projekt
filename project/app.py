@@ -5,7 +5,7 @@ import os, sys
 
 from baza import *
 
-# unesi_demo_podatke()
+unesi_demo_podatke()
 procitaj_podatke_tetovaze()
 procitaj_podatke_racuna()
 procitaj_podatke_osoblja()
@@ -161,7 +161,15 @@ def provjeraosoblja():
 
 @app.route('/signup')
 def signup():
-    return template('signup',form_akcija="")
+    return template("signup",data=None,form_akcija="/dodaj",template_lookup=[template_path])    
+
+@app.route("/dodaj",method='POST')
+def dodajkorisnika():
+    postdata=request.body.read()
+    e_mail=request.forms.get("e_mail")
+    lozinka=str(request.forms.get("lozinka"))
+    sacuvaj_korisnika(e_mail,lozinka)
+    redirect('/recenzije')
 
 @app.route('/osoblje')
 def osoblje():

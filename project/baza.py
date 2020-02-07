@@ -458,13 +458,13 @@ def velika_tetovaza():
                 t=Tetovaze(tat[0],tat[1],tat[2],tat[3],tat[4],tat[5])
                 lista_velikih.append(t)
 
-        print ("Uspjesno dohvaceni svi podaci iz tablice racuna")
+        print ("Uspjesno dohvaceni svi podaci iz tablice tetovaza")
 
         for t in lista_velikih:
             print(t)
         
     except Exception as e:
-        print("Dogodila se greska pri dohvacanju svih podataka iz tablice racuna: ",e)
+        print("Dogodila se greska pri dohvacanju svih podataka iz tablice tetovaza: ",e)
         con.rollback()
 
     con.close()
@@ -484,13 +484,13 @@ def mala_tetovaza():
                 t=Tetovaze(tat[0],tat[1],tat[2],tat[3],tat[4],tat[5])
                 lista_malih.append(t)
 
-        print ("Uspjesno dohvaceni svi podaci iz tablice racuna")
+        print ("Uspjesno dohvaceni svi podaci iz tablice tetovaza")
 
         for t in lista_malih:
             print(t)
         
     except Exception as e:
-        print("Dogodila se greska pri dohvacanju svih podataka iz tablice racuna: ",e)
+        print("Dogodila se greska pri dohvacanju svih podataka iz tablice tetovaza: ",e)
         con.rollback()
 
     con.close()
@@ -503,7 +503,7 @@ def odmanje():
         cur=con.cursor()
         cur.execute("SELECT * FROM tetovaze ORDER BY cijena ASC")
         podaci=cur.fetchall()
-        for tat in podaci:
+        for tat in podaci: 
             t=Tetovaze(tat[0],tat[1],tat[2],tat[3],tat[4],tat[5])
             listaodmanje.append(t)
 
@@ -520,13 +520,28 @@ def odvece():
         cur=con.cursor()
         cur.execute("SELECT * FROM tetovaze ORDER BY cijena DESC")
         podaci=cur.fetchall()
-
-        for tat in podaci:
+        for tat in podaci: 
             t=Tetovaze(tat[0],tat[1],tat[2],tat[3],tat[4],tat[5])
             listaodvece.append(t)
+             
 
     except Exception as e:
         print("Pogreška u sortiranju: ",e)
         con.rollback()
     con.close()
     return listaodvece
+
+def sacuvaj_korisnika(e_mail,lozinka):
+    con=sqlite3.connect('tattoo.db')
+    try:
+        cur=con.cursor()
+        cur.execute("INSERT INTO korisnik (e_mail,lozinka) VALUES (?,?)",(e_mail,lozinka))
+        con.commit()
+
+        print("Uspjesno dodan novi korisnik u bazu podataka")
+    
+    except Exception as e:
+        print("Dogodila se greska pri dodavanju novog korisnika u bazu podataka: ",e)
+        con.rollback()
+
+    con.close()

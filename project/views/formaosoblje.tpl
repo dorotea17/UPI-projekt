@@ -75,9 +75,14 @@
             </div>
 
             <div class="form-group">
-              <label for="korisnik_id">Id korisnika</label>
-              <input type="number" class="form-control" id="korisnik_id" name='korisnik_id' value='{{data._korisnik_id if data != None else ""}}' aria-describedby="korisnik_id-help" placeholder="Unesite id korisnika" required>
+              <label for="e_mail">E mail</label>
+              <input type="email" class="form-control" id="e_mail" name='e_mail' value='{{data._e_mail if data != None else ""}}' aria-describedby="e_mail-help" placeholder="Unesite e mail korisnika" required>
           </div>
+
+          <div class="form-group">
+            <label for="lozinka">Lozinka</label>
+            <input type="password" class="form-control" id="lozinka" name='lozinka' value='{{data._lozinka if data != None else ""}}' aria-describedby="lozinka-help" placeholder="Unesite lozinku korisnika" required>
+        </div>
 
             <button type="submit" class="btn btn-primary" name="save">Sačuvaj</button>
 
