@@ -45,7 +45,8 @@
               Prijava
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="/signin">Sign in</a>
+              <a class="dropdown-item" href="/signkorisnici">Sign in - Korisnici</a>
+              <a class="dropdown-item" href="/signosoblje">Sign in - Osoblje</a>
               <a class="dropdown-item" href="/signup">Sign up</a>
             </div>
           </li>

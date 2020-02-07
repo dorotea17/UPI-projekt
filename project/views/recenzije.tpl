@@ -66,25 +66,9 @@
           <tr>
             <th scope="col">Slika</th>  
             <th scope="col">Naziv</th>
-            <th scope="col" style="padding:0%; margin:0%; border:0%;"> 
-              <div class="dropdown" style="padding: 0%; margin: 0px; border: 0%;">
-                <p class="filter"><a href="/tetovaze">Veličina</a></p>
-                <div class="dropdownContent" style="padding:0%; margin: 0%; border: 0%;">
-                  <li><a href="/velika">Velika</a></li>
-                  <li><a href="/mala">Mala</a></li>
-                </div>
-              </div>
-              </th>
-            <th scope="col">Vrijeme</th>
-            <th scope="col" style="padding:0%; margin:0%; border:0%;"> 
-              <div class="dropdown" style="padding: 0%; margin: 0px; border: 0%;">
-                <p class="filter"><a href="/tetovaze">Cijena</a></p>
-                <div class="dropdownContent" style="padding:0%; margin: 0%; border: 0%;">
-                  <li><a href="/odmanje">Od manje</a></li>
-                  <li><a href="/odvece">Od vece</a></li>
-                </div>
-              </div>
-              </th>
+            <th scope="col">Cijena
+            </th>
+            <th scope="col">Ocjena</th>
           </tr>
         </thead>
         <tbody style="background-color: white;">
@@ -93,9 +77,8 @@
             <tr>
               <td><img src="{{item._link}}" height="200px" width="200px"></td>
               <td>{{item._naziv}}</td>
-              <td>{{item._velicina}}</td>
-              <td>{{item._vrijeme}} min</td>
               <td>{{item._cijena}}</td>
+              <td>{{item._ocjena}</td>
             </tr>
 
             %end

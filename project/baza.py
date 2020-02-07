@@ -323,7 +323,7 @@ def procitaj_podatke_korisnik():
     try:
         cur=con.cursor()
         cur.execute(""" SELECT id,e_mail,lozinka FROM korisnik """)
-        
+    
         podaci=cur.fetchall()
 
         for kor in podaci:
@@ -345,35 +345,6 @@ def procitaj_podatke_korisnik():
 
     con.close()
     return lista_korisnika
-
-def procitaj_osoblje():
-    con=sqlite3.connect("tattoo.db")
-    lista_osoblja=[]
-    try:
-        cur=con.cursor()
-        cur.execute(""" SELECT id,e_mail,lozinka FROM osoblje """)
-        
-        podaci=cur.fetchall()
-
-        for osob in podaci:
-            # 0 - id
-            # 1 - e_mail
-            # 2 - lozinka
-
-            o=Osoblje(osob[0],osob[1],osob[2])
-            lista_osoblja.append(o)
-
-        print ("Uspjesno dohvaceni svi podaci iz tablice korisnika")
-
-        for o in lista_osoblja:
-            print(o)
-        
-    except Exception as e:
-        print("Dogodila se greska pri dohvacanju svih podataka iz tablice korisnika: ",e)
-        con.rollback()
-
-    con.close()
-    return lista_osoblja
 
 def procitaj_podatke_racuna():
     con=sqlite3.connect("tattoo.db")
@@ -524,3 +495,38 @@ def mala_tetovaza():
 
     con.close()
     return lista_malih
+
+def odmanje():
+    con=sqlite3.connect('tattoo.db')
+    listaodmanje=[]
+    try:
+        cur=con.cursor()
+        cur.execute("SELECT * FROM tetovaze ORDER BY cijena ASC")
+        podaci=cur.fetchall()
+        for tat in podaci:
+            t=Tetovaze(tat[0],tat[1],tat[2],tat[3],tat[4],tat[5])
+            listaodmanje.append(t)
+
+    except Exception as e:
+        print("Pogreška u sortiranju: ",e)
+        con.rollback()
+    con.close()
+    return listaodmanje
+
+def odvece():
+    con=sqlite3.connect('tattoo.db')
+    listaodvece=[]
+    try:
+        cur=con.cursor()
+        cur.execute("SELECT * FROM tetovaze ORDER BY cijena DESC")
+        podaci=cur.fetchall()
+
+        for tat in podaci:
+            t=Tetovaze(tat[0],tat[1],tat[2],tat[3],tat[4],tat[5])
+            listaodvece.append(t)
+
+    except Exception as e:
+        print("Pogreška u sortiranju: ",e)
+        con.rollback()
+    con.close()
+    return listaodvece

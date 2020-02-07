@@ -45,8 +45,9 @@
               Prijava
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="/signin">Sign in</a>
-              <a class="dropdown-item active" href="/signup">Sign up<span class="sr-only">(current)</span></a>
+              <a class="dropdown-item" href="/signkorisnici">Sign in - Korisnici</a>
+              <a class="dropdown-item" href="/signosoblje">Sign in - Osoblje</a>
+              <a class="dropdown-item active" href="/signup">Sign up</a>
             </div>
           </li>
         </ul>
@@ -67,7 +68,7 @@
         <input type="email" class="form-control" id="e_mail" name='e_mail' placeholder="Unesite email..." required width="80%">
         <br>
         <label for="lozinka">Lozinka</label>
-        <input type="password" class="form-control" id="lozinka" name='lozinka' placeholder="Unesite lozinku..." required width="80%">
+        <input type="password" class="form-control" id="lozinka" name='lozinka' placeholder="Unesite lozinku..." required width="80%"><br>
         <button class="btn btn-secondary" type="submit" style="width:120px;height:40px;margin-top: 20px;">Sign up</button><br><br>
       </form>
         </div>
