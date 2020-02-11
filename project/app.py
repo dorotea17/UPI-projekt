@@ -97,29 +97,6 @@ def izbrisi_tattoo():
 def signin():
     return template('signin',data=None,form_akcija="/provjera",template_lookup=[template_path])
 
-@app.route('/provjera',method='POST')
-def provjera():
-    postdata=request.body.read()
-    e_mail=request.forms.get("e_mail")
-    lozinka=str(request.forms.get("lozinka"))
-    oznaka=str(request.forms.get("flip"))
-    svi_korisnici=procitaj_podatke_korisnik()
-    cijelo_osoblje=procitaj_osoblje()
-    if (request.forms.get("flip")=="checked"):
-        for korisnik in svi_korisnici:
-            if (korisnik._e_mail==e_mail):
-                if (korisnik._lozinka==lozinka):
-                    return template('about',data=None,template_lookup=[template_path])
-                else:
-                    return template('signin',form_akcija='provjera',template_lookup=[template_path])
-    else:
-        for osoblje in cijelo_osoblje:
-            if (osoblje._e_mail==e_mail):
-                if (osoblje._lozinka==lozinka):
-                    tetovaze=procitaj_podatke_tetovaze()
-                    return template('tattoo',data=tetovaze,template_lookup=[template_path])
-                else:
-                    return template('signup')
 
 @app.route('/signkorisnici')
 def signkorisnik():
@@ -282,6 +259,10 @@ def mala_tetovaza_():
 def recenzije_():
     podaci=procitaj_podatke_tetovaze()
     return template('recenzije', data=podaci, template_lookup=[template_path])
+
+@app.route('/formarecenzije')
+def formarecenzije():
+    podaci=procitaj_recenzije
 
 @app.route('/odmanje')
 def od_manje():

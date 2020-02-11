@@ -26,29 +26,14 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="/">Početna
-                </a>
-              </li>
-              <li class="nav-item" id="about">
-                <a class="nav-link" href="/about">O nama</a>
-              </li>
               <li class="nav-item active">
-                <a class="nav-link" href="/tetovaze">Tetovaže<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/">Recenzije
+                </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/contact">Kontakt</a>
+                <a class="nav-link" href="/">Odjava</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                  Prijava
-                </a>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="/signkorisnici">Sign in - Korisnici</a>
-                  <a class="dropdown-item" href="/signosoblje">Sign in - Osoblje</a>
-                  <a class="dropdown-item" href="/signup">Sign up</a>
-                </div>
-              </li>
+
             </ul>
           </div>
         </div>
@@ -69,6 +54,7 @@
             <th scope="col">Cijena
             </th>
             <th scope="col">Ocjena</th>
+            <th scope="col">Uredi ocjenu</th>
           </tr>
         </thead>
         <tbody style="background-color: white;">
@@ -79,8 +65,12 @@
               <td>{{item._naziv}}</td>
               <td>{{item._cijena}}</td>
               <td>{{item._ocjena}</td>
+              <td>
+                <a href=''>
+                  <i class="fas fa-edit"></i>
+                </a>
+              </td>
             </tr>
-
             %end
         </tbody>
       </table>
@@ -91,5 +81,6 @@
 		//example of calling custom function
 		helloWorld();
   </script>
+
 </body>
 </html>

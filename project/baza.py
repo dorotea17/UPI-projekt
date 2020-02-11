@@ -8,6 +8,7 @@ from tetovaze import Tetovaze
 from osoblje import Osoblje
 from racuni import Racuni
 from korisnik import Korisnik
+from recenzije import Recenzije
 
 def unesi_demo_podatke():
     con=sqlite3.connect('tattoo.db')
@@ -116,6 +117,43 @@ def unesi_demo_podatke():
         print("Dogodila se greska pri kreiranju demo podataka: ",e)
         con.rollback()
 
+        #recenzije
+    try:
+        cur=con.cursor()
+        cur.executescript("""
+                
+        DROP TABLE IF EXISTS recenzije;
+        CREATE TABLE IF NOT EXISTS recenzije (
+        ocjena INTEGER NOT NULL,
+        tetovaze_id integer NOT NULL,
+        korisnik_id integer NOT NULL,
+        FOREIGN KEY (tetovaze_id) REFERENCES tetovaze (id),
+        FOREIGN KEY (korisnik_id) REFERENCES korisnik (id));
+        """)
+        print("Uspjesno kreirana tablica recenzije")
+
+    except Exception as e:
+        print("Dogodila se greska pri kreiranju demo podataka: ",e)
+        con.rollback()
+    con.close()
+
+def procitaj_recenzije():
+    con=sqlite3.connect('tattoo.db')
+    lista_recenzija=[]
+    try:
+        cur=con.cursor()
+        cur.execute("SELECT ocjena, tetovaze_id, korisnik_id FROM recenzije")
+        podaci=cur.fetchall()
+
+        for rec in podaci:
+            r=Recenzije(rec[0],rec[1],rec[2])
+            lista_recenzija.append(r)
+        
+        print("Uspjesno dohvaceni svi podaci iz tablice recenzije")
+
+    except Exception as e:
+        print("Dogodila se greska pri dohvacanju podataka iz tablice recenzije: ",e)
+        con.rollback()
     con.close()
 
 def procitaj_podatke_tetovaze():
@@ -200,6 +238,27 @@ def dohvati_tetovazu_po_id(tetovaze_id):
 
     con.close()
     return tetovaze  
+
+def trazitetovazu(tetovaze_naziv):
+    con = sqlite3.connect("tattoo.db")
+    tetovaze = None
+    try:
+
+        cur = con.cursor()
+        cur.execute("SELECT id, link, naziv, velicina, vrijeme, cijena FROM tetovaze WHERE naziv=?", (tetovaze_naziv))
+        podaci = cur.fetchone()
+
+        print ("podaci", podaci)
+        tetovaze = Tetovaze(podaci[0])
+        print("Uspjesno dohvacena tetovaza iz baze podataka po nazivu")
+
+    except Exception as e:
+        print ("Dogodila se greska pri dohvacanju tetovaze iz baze podataka po nazivu: ", e)
+        con.rollback()
+
+    con.close()
+    return tetovaze  
+
 
 def azuriraj_tetovazu(tetovaze_id, link, naziv, velicina, vrijeme, cijena):
     con = sqlite3.connect("tattoo.db")
@@ -545,3 +604,21 @@ def sacuvaj_korisnika(e_mail,lozinka):
         con.rollback()
 
     con.close()
+
+def traziosoblje(osoblje_ime):
+    con=sqlite3.connect('tattoo.db')
+    osoblje=None
+    try:
+        cur=con.cursor()
+        cur.execute("SELECT id, ime, prezime,datumpocetkarada,brojtetovazaizradenih,e_mail,lozinka FROM osoblje WHERE ime=?", (osoblje_ime))
+        podaci = cur.fetchone()
+
+        print ("podaci", podaci)
+        osoblje = Osoblje(podaci[0])
+
+    except Exception as e:
+        print("Dogodila se greska pri dodavanju novog korisnika u bazu podataka: ",e)
+        con.rollback()
+
+    con.close()
+    return osoblje
