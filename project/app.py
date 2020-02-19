@@ -10,6 +10,8 @@ procitaj_podatke_tetovaze()
 procitaj_podatke_racuna()
 procitaj_podatke_osoblja()
 procitaj_podatke_korisnik()
+trenutnikorisnik=""
+trenutnoosoblje=""
 dirname = os.path.dirname(sys.argv[0])
 template_path=dirname+'\\views'
 app = Bottle()
@@ -93,17 +95,13 @@ def izbrisi_tattoo():
     izbrisi_tetovazu(tetovaze_id)
     redirect('/tattoo')
 
-@app.route('/signin')
-def signin():
-    return template('signin',data=None,form_akcija="/provjera",template_lookup=[template_path])
-
-
 @app.route('/signkorisnici')
 def signkorisnik():
     return template('signin',data=None,form_akcija="provjerak",template_lookup=[template_path])
 
-@app.route('/provjerak',method='POST')
+@app.route('/provjerak',method=['GET','POST'])
 def provjerakorisnika():
+    global trenutnikorisnik
     postdata=request.body.read()
     e_mail=request.forms.get("e_mail")
     lozinka=str(request.forms.get("lozinka"))
@@ -111,6 +109,7 @@ def provjerakorisnika():
     for korisnik in svi_korisnici:
         if (korisnik._e_mail==e_mail):
             if (korisnik._lozinka==lozinka):
+                trenutnikorisnik=korisnik._e_mail
                 podaci=procitaj_podatke_tetovaze()
                 return template('recenzije',data=podaci,template_lookup=[template_path])
             else:
@@ -123,6 +122,7 @@ def sign_osoblje():
 
 @app.route('/provjerao',method='POST')
 def provjeraosoblja():
+    global trenutnoosoblje
     postdata=request.body.read()
     e_mail=request.forms.get("e_mail")
     lozinka=str(request.forms.get("lozinka"))
@@ -130,6 +130,7 @@ def provjeraosoblja():
     for osoblje in svo_osoblje:
         if (osoblje._e_mail==e_mail):
             if (osoblje._lozinka==lozinka):
+                trenutnoosoblje=osoblje._ime +" " + osoblje._prezime
                 tetovaze=procitaj_podatke_tetovaze()
                 return template('tattoo',data=tetovaze,template_lookup=[template_path])
             else:
@@ -142,10 +143,12 @@ def signup():
 
 @app.route("/dodaj",method='POST')
 def dodajkorisnika():
+    global trenutnikorisnik
     postdata=request.body.read()
     e_mail=request.forms.get("e_mail")
     lozinka=str(request.forms.get("lozinka"))
     sacuvaj_korisnika(e_mail,lozinka)
+    trenutnikorisnik = e_mail
     redirect('/recenzije')
 
 @app.route('/osoblje')
@@ -203,17 +206,19 @@ def racuni():
 
 @app.route('/novi-racun')
 def novi_racun():
-    return template('formaracuni',data=None,form_akcija="/spremi-racun",template_lookup=[template_path])
+    listaosoblja = svo_osoblje()
+    listatetovaza = sve_tetovaze()
+    return template('formaracuni',data=None, podaciO=listaosoblja, podaciT=listatetovaza,form_akcija="/spremi-racun",template_lookup=[template_path])
 
 @app.route('/spremi-racun', method='POST')
 def spremi_racun_():
     postdata=request.body.read()
 
     datum=request.forms.get("datum")
-    osoblje_id=int(request.forms.get("osoblje_id"))
-    tetovaze_id=int(request.forms.get("tetovaze_id"))
+    osoba=request.forms.get("osoblje")
+    tetovaza=request.forms.get("tetovaza")
     ukupno=int(request.forms.get("ukupno"))
-    sacuvaj_novi_racun(datum,osoblje_id,tetovaze_id,ukupno)
+    sacuvaj_novi_racun(datum,osoba,tetovaza,ukupno)
 
     redirect('/racuni')
 
@@ -221,17 +226,19 @@ def spremi_racun_():
 def azuriraj_racun_():
     racuni_id=request.query['racuniid']
     racuni=dohvati_racun_po_id(racuni_id)
-    return template('formaracuni',data=racuni, form_akcija="/azuriraj-racun-save",template_lookup=[template_path])
+    listaosoblja = svo_osoblje()
+    listatetovaza = sve_tetovaze()
+    return template('formaracuni',data=racuni, podaciO=listaosoblja, podaciT=listatetovaza, form_akcija="/azuriraj-racun-save",template_lookup=[template_path])
 
 @app.route('/azuriraj-racun-save',method='POST')
 def azuriraj_racun_save():
     racuni_id=request.forms.get("racuniid")
     datum=request.forms.get("datum")
-    osoblje_id=int(request.forms.get("osoblje_id"))
-    tetovaze_id=int(request.forms.get("tetovaze_id"))
+    osoba=request.forms.get("osoblje")
+    tetovaza=request.forms.get("tetovaza")
     ukupno=int(request.forms.get("ukupno"))
 
-    azuriraj_racun(racuni_id,datum,osoblje_id,tetovaze_id,ukupno)
+    azuriraj_racun(racuni_id,datum,osoba,tetovaza,ukupno)
     redirect('/racuni')
 
 @app.route('/izbrisi-racun')
@@ -273,5 +280,16 @@ def od_manje():
 def od_vece():
     podaci=odvece()
     return template('tetovaze',data=podaci,template_lookup=[template_path])
+
+@app.route('/formarecenzije')
+def urediocjenu():
+    return template("formarecenzije",data=None,template_lookup=[template_path])
+
+@app.route('/odjava')
+def odjava():
+    global trenutnikorisnik, trenutnoosoblje
+    trenutnikorisnik=""
+    trenutnoosoblje=""
+    redirect('/')
 
 run(app, host='localhost', port = 1212)

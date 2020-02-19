@@ -38,7 +38,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/">Odjava</a>
+            <a class="nav-link" href="/odjava">Odjava</a>
               <span class="sr-only"></span>
             </a>
           </li>
@@ -58,17 +58,35 @@
                 <label for="datum">Datum</label>
                 <input type="date" class="form-control" id="datum" name='datum' value='{{data._datum if data != None else ""}}' aria-describedby="datum-help" placeholder="Unesite datum" required>
             </div>
-
-            <div class="form-group">
-              <label for="osoblje_id">Osoblje</label>
-              <input type="number" class="form-control" id="osoblje_id" name='osoblje_id' value='{{data._osoblje_id if data != None else ""}}' aria-describedby="osoblje_id-help" placeholder="Unesite id osoblja" required>
-          </div>
+          <label for="osoblje">Osoblje</label><br>
+          <select class="selectpicker form-control" type="text" id="osoblje" name="osoblje" style="height: 40px;" value='{{data._id if data != None else ""}}'></select>
+          <script>
+            var select = document.getElementById("osoblje");
+            var options = {{!podaciO}}
             
-            <div class="form-group">
-                <label for="tetovaze_id">Tetovaze</label>
-                <input type="number" class="form-control" id="tetovaze_id" name='tetovaze_id' value='{{data._tetovaze_id if data != None else ""}}' aria-describedby="tetovaze_id-help" placeholder="Unesite id tetovaze" required>
-            </div>
-
+            for(var i = 0; i < options.length; i++) {
+              var opt = options[i];
+              var el = document.createElement("option");
+              el.textContent = opt;
+              el.value = opt;
+              select.appendChild(el);
+            }
+          </script><br>
+            
+            <label for="tetovaza">Tetovaža</label><br>
+            <select class="selectpicker form-control" type="text" id="tetovaza" name="tetovaza" style="height: 40px;"></select>
+            <script>
+              var select = document.getElementById("tetovaza");
+              var options = {{!podaciT}}
+              
+              for(var i = 0; i < options.length; i++) {
+                var opt = options[i];
+                var el = document.createElement("option");
+                el.textContent = opt;
+                el.value = opt;
+                select.appendChild(el);
+              }
+            </script><br>
             <div class="form-group">
                 <label for="ukupno">Ukupno</label>
                 <input type="number" class="form-control" id="ukupno" name='ukupno' value='{{data._ukupno if data != None else ""}}' aria-describedby="ukupno-help" placeholder="Unesite ukupan iznos" required>
@@ -78,5 +96,6 @@
 
         </form>     
     </div>
+
 </body>
 </html>

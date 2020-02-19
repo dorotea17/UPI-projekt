@@ -38,7 +38,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/">Odjava</a>
+            <a class="nav-link" href="/odjava">Odjava</a>
               <span class="sr-only"></span>
             </a>
           </li>
@@ -71,18 +71,18 @@
 
             %for item in data:
             <tr>
-              <th scope="row">{{item._id}}</th>
-              <td>{{item._datum}}</td>
-              <td>{{item._osoblje_id}}</td>
-              <td>{{item._tetovaze_id}}</td>
-              <td>{{item._ukupno}}</td>
+              <th scope="row">{{item[1]._id}}</th>
+              <td>{{item[1]._datum}}</td>
+              <td>{{item[2]._ime}} {{item[2]._prezime}}</td>
+              <td>{{item[0]._naziv}}</td>
+              <td>{{item[1]._ukupno}}</td>
               <td>
-                <a href='/azuriraj-racun?racuniid={{item._id}}'>
+                <a href='/azuriraj-racun?racuniid={{item[1]._id}}'>
                   <i class="fas fa-edit"></i>
                 </a>
               </td>
               <td>
-                <a href='/izbrisi-racun?racuniid={{item._id}}'>
+                <a href='/izbrisi-racun?racuniid={{item[1]._id}}'>
                   <i class="fas fa-trash-alt"></i>
                 </a>
               </td>

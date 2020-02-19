@@ -9,6 +9,8 @@
     <title>My UPI Project</title>
     <link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/static/custom.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
     <script type="text/javascript" src="/static/jquery.js"></script>
 	<script type="text/javascript" src="/static/custom.js"></script>
     <script type="text/javascript" src="/static/bootstrap.min.js"></script> 
@@ -27,11 +29,11 @@
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="/">Recenzije
+                <a class="nav-link" href="/recenzije">Recenzije
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/">Odjava</a>
+                <a class="nav-link" href="/odjava">Odjava</a>
               </li>
 
             </ul>
@@ -61,12 +63,12 @@
 
             %for item in data:
             <tr>
-              <td><img src="{{item._link}}" height="200px" width="200px"></td>
+              <th scope="row"><img src="{{item._link}}" height="200px" width="200px"></th>
               <td>{{item._naziv}}</td>
               <td>{{item._cijena}}</td>
               <td>{{item._ocjena}</td>
               <td>
-                <a href=''>
+                <a href='/formarecenzije'>
                   <i class="fas fa-edit"></i>
                 </a>
               </td>

@@ -410,24 +410,22 @@ def procitaj_podatke_racuna():
     lista_racuna=[]
     try:
         cur=con.cursor()
-        cur.execute(""" SELECT id,datum,osoblje_id,tetovaze_id,ukupno FROM racuni """)
+        cur.execute(""" SELECT * FROM tetovaze INNER JOIN racuni
+                        ON racuni.tetovaze_id = tetovaze.id INNER JOIN osoblje
+                        ON racuni.osoblje_id = osoblje.id """)
         
         podaci=cur.fetchall()
 
-        for rac in podaci:
-            # 0 - id
-            # 1 - datum
-            # 2 - osoblje_id
-            # 3 - tetovaze_id
-            # 4 - ukupno
+        for e in podaci:
+            lista = []
+            lista.append(Tetovaze(e[0],e[1],e[2],e[3],e[4],e[5]))
+            lista.append(Racuni(e[6],e[7],e[8],e[9],e[10]))
+            lista.append(Osoblje(e[11],e[12],e[13],e[14],e[15],e[16],e[17]))
+            lista_racuna.append(lista)
 
-            r=Racuni(rac[0],rac[1],rac[2],rac[3],rac[4])
-            lista_racuna.append(r)
 
         print ("Uspjesno dohvaceni svi podaci iz tablice racuna")
 
-        for r in lista_racuna:
-            print(r)
         
     except Exception as e:
         print("Dogodila se greska pri dohvacanju svih podataka iz tablice racuna: ",e)
@@ -436,10 +434,20 @@ def procitaj_podatke_racuna():
     con.close()
     return lista_racuna
 
-def sacuvaj_novi_racun(datum,osoblje_id,tetovaze_id,ukupno):
+def sacuvaj_novi_racun(datum,osoba,tetovaza,ukupno):
     con=sqlite3.connect("tattoo.db")
     try:
         cur=con.cursor()
+        imena=osoba.split(" ")
+        ime=imena[0]
+        prezime=imena[1]
+        cur.execute("SELECT id FROM osoblje WHERE ime = ? AND prezime = ? ",(ime,prezime))
+        osoblje_id=cur.fetchone()
+        osoblje_id=osoblje_id[0]
+
+        cur.execute("SELECT id FROM tetovaze WHERE naziv = ?",(tetovaza))
+        tetovaze_id=cur.fetchone()
+        tetovaze_id=tetovaze_id[0]
         cur.execute("INSERT INTO racuni (datum,osoblje_id,tetovaze_id,ukupno) VALUES (?,?,?,?)",(datum,osoblje_id,tetovaze_id,ukupno))
         con.commit()
 
@@ -470,10 +478,17 @@ def dohvati_racun_po_id(racuni_id):
     con = sqlite3.connect("tattoo.db")
     racuni = None
     try:
-
         cur = con.cursor()
         cur.execute("SELECT id, datum, osoblje_id, tetovaze_id, ukupno FROM racuni WHERE id=?", (racuni_id))
         podaci = cur.fetchone()
+
+        # cur.execute("SELECT ime, prezime FROM osoblje WHERE id = ?",(podaci[2]))
+        # osoba=cur.fetchone()
+        # osoba=osoba[0]+" "+osoba[1]
+
+        # cur.execute("SELECT naziv FROM tetovaze WHERE id = ?",(podaci[3]))
+        # tetovaza=cur.fetchone()
+        # tetovaza=tetovaza[0]
 
         print ("podaci", podaci)
         racuni = Racuni(podaci[0], podaci[1], podaci[2], podaci[3], podaci[4])
@@ -485,13 +500,22 @@ def dohvati_racun_po_id(racuni_id):
         con.rollback()
 
     con.close()
-    return racuni  
+    return racuni 
 
-def azuriraj_racun(racuni_id, datum, osoblje_id, tetovaze_id, ukupno):
+def azuriraj_racun(racuni_id, datum, osoba, tetovaza, ukupno):
     con = sqlite3.connect("tattoo.db")
     try:
-
         cur = con.cursor()
+        imena=osoba.split(" ")
+        ime=imena[0]
+        prezime=imena[1]
+        cur.execute("SELECT id FROM osoblje WHERE ime = ? AND prezime = ? ",(ime,prezime))
+        osoblje_id=cur.fetchone()
+        osoblje_id=osoblje_id[0]
+
+        cur.execute("SELECT id FROM tetovaze WHERE naziv = ?",(tetovaza))
+        tetovaze_id=cur.fetchone()
+        tetovaze_id=tetovaze_id[0]
         cur.execute("UPDATE racuni SET datum = ?, osoblje_id = ?, tetovaze_id = ?, ukupno = ? WHERE id = ?", (datum, osoblje_id, tetovaze_id, ukupno, racuni_id))
         con.commit()
 
@@ -622,3 +646,33 @@ def traziosoblje(osoblje_ime):
 
     con.close()
     return osoblje
+
+def svo_osoblje():
+    con=sqlite3.connect('tattoo.db')
+    listaosoblja=[]
+    try:
+        cur = con.cursor()
+        cur.execute("SELECT ime, prezime FROM osoblje")
+        osobe=cur.fetchall()
+        for o in osobe:
+            listaosoblja.append(o[0]+" "+ o[1])
+    except Exception as e:
+        print ("Dogodila se greška pri čitanju podataka: ",e)
+        con.rollback()
+    con.close()
+    return listaosoblja
+
+def sve_tetovaze():
+    con=sqlite3.connect('tattoo.db')
+    listatetovaza=[]
+    try:
+        cur=con.cursor()
+        cur.execute("SELECT naziv FROM tetovaze")
+        tetovaze=cur.fetchall()
+        for t in tetovaze:
+            listatetovaza.append(t[0])
+    except Exception as e:
+        print("Dogodila se greska pri citanju podataka: ",e)
+        con.rollback()
+    con.close()
+    return listatetovaza

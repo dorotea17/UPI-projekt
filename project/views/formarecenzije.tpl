@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="/static/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/static/custom.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
     <script type="text/javascript" src="/static/jquery.js"></script>
 	<script type="text/javascript" src="/static/custom.js"></script>
@@ -27,20 +28,12 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-              Tattoo Studio
+          <li class="nav-item active">
+            <a class="nav-link" href="/recenzije">Recenzije
             </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="/tattoo">Tetovaže</a>
-              <a class="dropdown-item active" href="/osoblje">Osoblje<span class="sr-only">(current)</span></a>
-              <a class="dropdown-item" href="/racuni">Računi</a>
-            </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/">Odjava</a>
-              <span class="sr-only"></span>
-            </a>
+            <a class="nav-link" href="/odjava">Odjava</a>
           </li>
         </ul>
       </div>
@@ -48,18 +41,25 @@
   </nav>
 
   <!-- Page Content -->
+
   <div class="container">
-	<div class="row" style="margin-top: 50px;">
-        <form style="width: 100%" action='{{form_akcija}}' method='POST'>
-
-            <div class="form-group">
-                <label for="ocjena">Ocjena 1-5</label>
-                <input type="number" class="form-control" id="ocjena" name='ocjena' value='{{data._ocjena if data != None else ""}}' aria-describedby="brojtetovazaizradenih-help" placeholder="Unesite broj izradenih tetovaza" required>
-            </div>
-
+  <div class="row" style="margin-top: 50px;">
+    <div class="col-lg-12 text-center">
+      <h1 class="mt-5">Recenzija</h1>
+    </div>
+        <form style="width: 100%">
+          <div class="rating">
+            <input type="radio" name="star" id="star1"><label for="star1"></label>
+            <input type="radio" name="star" id="star2"><label for="star2"></label>
+            <input type="radio" name="star" id="star3"><label for="star3"></label>
+            <input type="radio" name="star" id="star4"><label for="star4"></label>
+            <input type="radio" name="star" id="star5"><label for="star5"></label>
+          </div>
+          <br><br><br><br><br><br>
             <button type="submit" class="btn btn-primary" name="save">Sačuvaj</button>
 
         </form>     
+	</div>
     </div>
 </body>
 </html>
