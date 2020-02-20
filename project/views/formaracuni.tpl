@@ -58,20 +58,21 @@
                 <label for="datum">Datum</label>
                 <input type="date" class="form-control" id="datum" name='datum' value='{{data[1]._datum if data != None else ""}}' aria-describedby="datum-help" placeholder="Unesite datum" required>
             </div>
-          <label for="osoblje">Osoblje</label><br>
-          <select class="selectpicker form-control" type="text" id="osoblje" name="osoblje" style="height: 40px;"></select>
-          <script>
-            var select = document.getElementById("osoblje");
-            var options = {{!podaciO}}
+
+            <label for="osoblje">Osoblje</label><br>
+            <select class="selectpicker form-control" type="text" id="osoblje" name="osoblje" style="height: 40px;" required></select>
+            <script>
+              var select = document.getElementById("osoblje");
+              var options = {{!podaciO}}
             
-            for(var i = 0; i < options.length; i++) {
-              var opt = options[i];
-              var el = document.createElement("option");
-              el.textContent = opt;
-              el.value = opt;
-              select.appendChild(el);
-            }
-          </script><br>
+              for(var i = 0; i < options.length; i++) {
+                var opt = options[i];
+                var el = document.createElement("option");
+                el.textContent = opt;
+                el.value = opt;
+                select.appendChild(el);
+              }
+            </script><br>
             
             <label for="tetovaze">Tetovaža</label><br>
             <select class="selectpicker form-control" type="text" id="tetovaze" name="tetovaze" style="height: 40px;"></select>

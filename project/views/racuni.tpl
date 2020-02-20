@@ -73,7 +73,7 @@
             <tr>
               <th scope="row">{{item[1]._id}}</th>
               <td>{{item[1]._datum}}</td>
-              <td>{{item[2]._ime}} {{item[2]._prezime}}</td>
+              <td>{{item[2]._ime_prezime}}</td>
               <td>{{item[0]._naziv}}</td>
               <td>{{item[1]._ukupno}}</td>
               <td>

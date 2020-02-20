@@ -55,14 +55,9 @@
             <input type="hidden" class="form-control" id="osobljeid" name='osobljeid' value='{{data._id if data != None else ""}}'>
 
             <div class="form-group">
-                <label for="ime">Ime</label>
-                <input type="text" class="form-control" id="ime" name='ime' value='{{data._ime if data != None else ""}}' aria-describedby="ime-help" placeholder="Unesite ime" required>
+                <label for="ime_prezime">Ime i prezime</label>
+                <input type="text" class="form-control" id="ime_prezime" name='ime_prezime' value='{{data._ime_prezime if data != None else ""}}' aria-describedby="ime_prezime-help" placeholder="Unesite ime i prezime" required>
             </div>
-
-            <div class="form-group">
-              <label for="prezime">Prezime</label>
-              <input type="text" class="form-control" id="prezime" name='prezime' value='{{data._prezime if data != None else ""}}' aria-describedby="prezime-help" placeholder="Unesite prezime" required>
-          </div>
             
             <div class="form-group">
                 <label for="datumpocetkarada">Datum pocetka rada</label>

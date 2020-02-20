@@ -130,7 +130,7 @@ def provjeraosoblja():
     for osoblje in svo_osoblje:
         if (osoblje._e_mail==e_mail):
             if (osoblje._lozinka==lozinka):
-                trenutnoosoblje=osoblje._ime +" " + osoblje._prezime
+                trenutnoosoblje=osoblje._ime_prezime
                 tetovaze=procitaj_podatke_tetovaze()
                 return template('tattoo',data=tetovaze,template_lookup=[template_path])
             else:
@@ -164,13 +164,12 @@ def novo_osoblje():
 def spremi_osoblje():
     postdata=request.body.read()
 
-    ime=request.forms.get("ime")
-    prezime=request.forms.get("prezime")
+    ime_prezime=request.forms.get("ime_prezime")
     datumpocetkarada=request.forms.get("datumpocetkarada")
     brojtetovazaizradenih=int(request.forms.get("brojtetovazaizradenih"))
     e_mail=request.forms.get("e_mail")
     lozinka=str(request.forms.get("lozinka"))
-    sacuvaj_novo_osoblje(ime,prezime,datumpocetkarada,brojtetovazaizradenih,e_mail,lozinka)
+    sacuvaj_novo_osoblje(ime_prezime,datumpocetkarada,brojtetovazaizradenih,e_mail,lozinka)
 
     redirect('/osoblje')
 
@@ -183,14 +182,13 @@ def azuriraj_osoblje_():
 @app.route('/azuriraj-osoblje-save',method='POST')
 def azuriraj_osoblje_save():
     osoblje_id=request.forms.get("osobljeid")
-    ime=request.forms.get("ime")
-    prezime=request.forms.get("prezime")
+    ime_prezime=request.forms.get("ime_prezime")
     datumpocetkarada=request.forms.get("datumpocetkarada")
     brojtetovazaizradenih=int(request.forms.get("brojtetovazaizradenih"))
     e_mail=request.forms.get("e_mail")
     lozinka=str(request.forms.get("lozinka"))
 
-    azuriraj_osoblje(osoblje_id,ime,prezime,datumpocetkarada,brojtetovazaizradenih,e_mail,lozinka)
+    azuriraj_osoblje(osoblje_id,ime_prezime,datumpocetkarada,brojtetovazaizradenih,e_mail,lozinka)
     redirect('/osoblje')
 
 @app.route('/izbrisi-osoblje')
@@ -215,10 +213,10 @@ def spremi_racun_():
     postdata=request.body.read()
 
     datum=request.forms.get("datum")
-    osoba=request.forms.get("osoblje")
+    osoblje=request.forms.get("osoblje")
     tetovaze=request.forms.get("tetovaze")
     ukupno=int(request.forms.get("ukupno"))
-    sacuvaj_novi_racun(datum,osoba,tetovaze,ukupno)
+    sacuvaj_novi_racun(datum,osoblje,tetovaze,ukupno)
 
     redirect('/racuni')
 

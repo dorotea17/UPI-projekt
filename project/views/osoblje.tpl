@@ -59,8 +59,7 @@
         <thead>
           <tr>
             <th scope="col">#</th>  
-            <th scope="col">Ime</th>
-            <th scope="col">Prezime</th>
+            <th scope="col">Ime i prezime</th>
             <th scope="col">Datum početka rada</th>
             <th scope="col">Broj izrađenih tetovaža</th>
             <th scope="col">Uredi</th>
@@ -72,8 +71,7 @@
             %for item in data:
             <tr>
               <th scope="row">{{item._id}}</th>
-              <td>{{item._ime}}</td>
-              <td>{{item._prezime}}</td>
+              <td>{{item._ime_prezime}}</td>
               <td>{{item._datumpocetkarada}}</td>
               <td>{{item._brojtetovazaizradenih}}</td>
               <td>

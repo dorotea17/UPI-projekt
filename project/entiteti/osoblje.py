@@ -1,8 +1,7 @@
 class Osoblje():
-    def __init__(self,id,ime,prezime,datumpocetkarada,brojtetovazaizradenih,e_mail,lozinka):
+    def __init__(self,id,ime_prezime,datumpocetkarada,brojtetovazaizradenih,e_mail,lozinka):
         self._id=id
-        self._ime=ime
-        self._prezime=prezime
+        self._ime_prezime=ime_prezime
         self._datumpocetkarada=datumpocetkarada
         self._brojtetovazaizradenih=brojtetovazaizradenih
         self._e_mail=e_mail
@@ -13,12 +12,8 @@ def id(self):
     return self._id
 
 @property
-def ime(self):
-    return self._ime
-
-@property
-def prezime(self):
-    return self._prezime
+def ime_prezime(self):
+    return self._ime_prezime
 
 @property
 def datumpocetkarada(self):
@@ -39,11 +34,10 @@ def lozinka(self):
 def __str__(self):
     return """
     id: {0}
-    ime: {1}
-    prezime: {2}
-    datumpocetkarada: {3}
-    brojtetovazaizradenih: {4}
-    e_mail: {5}
-    lozinka: {6}
+    ime_prezime: {1}
+    datumpocetkarada: {2}
+    brojtetovazaizradenih: {3}
+    e_mail: {4}
+    lozinka: {5}
     -------------
-    """.format(self._id,self._ime,self._prezime,self._datumpocetkarada,self._brojtetovazaizradenih,self._e_mail,self._lozinka)
+    """.format(self._id,self._ime_prezime,self._datumpocetkarada,self._brojtetovazaizradenih,self._e_mail,self._lozinka)
