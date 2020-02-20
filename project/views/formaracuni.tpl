@@ -52,14 +52,14 @@
 	<div class="row" style="margin-top: 50px;">
         <form style="width: 100%" action='{{form_akcija}}' method='POST'>
 
-            <input type="hidden" class="form-control" id="racuniid" name='racuniid' value='{{data._id if data != None else ""}}'>
+            <input type="hidden" class="form-control" id="racuniid" name='racuniid' value='{{data[1]._id if data != None else ""}}'>
 
             <div class="form-group">
                 <label for="datum">Datum</label>
-                <input type="date" class="form-control" id="datum" name='datum' value='{{data._datum if data != None else ""}}' aria-describedby="datum-help" placeholder="Unesite datum" required>
+                <input type="date" class="form-control" id="datum" name='datum' value='{{data[1]._datum if data != None else ""}}' aria-describedby="datum-help" placeholder="Unesite datum" required>
             </div>
           <label for="osoblje">Osoblje</label><br>
-          <select class="selectpicker form-control" type="text" id="osoblje" name="osoblje" style="height: 40px;" value='{{data._id if data != None else ""}}'></select>
+          <select class="selectpicker form-control" type="text" id="osoblje" name="osoblje" style="height: 40px;"></select>
           <script>
             var select = document.getElementById("osoblje");
             var options = {{!podaciO}}
@@ -73,10 +73,10 @@
             }
           </script><br>
             
-            <label for="tetovaza">Tetovaža</label><br>
-            <select class="selectpicker form-control" type="text" id="tetovaza" name="tetovaza" style="height: 40px;"></select>
+            <label for="tetovaze">Tetovaža</label><br>
+            <select class="selectpicker form-control" type="text" id="tetovaze" name="tetovaze" style="height: 40px;"></select>
             <script>
-              var select = document.getElementById("tetovaza");
+              var select = document.getElementById("tetovaze");
               var options = {{!podaciT}}
               
               for(var i = 0; i < options.length; i++) {
@@ -89,7 +89,7 @@
             </script><br>
             <div class="form-group">
                 <label for="ukupno">Ukupno</label>
-                <input type="number" class="form-control" id="ukupno" name='ukupno' value='{{data._ukupno if data != None else ""}}' aria-describedby="ukupno-help" placeholder="Unesite ukupan iznos" required>
+                <input type="number" class="form-control" id="ukupno" name='ukupno' value='{{data[1]._ukupno if data != None else ""}}' aria-describedby="ukupno-help" placeholder="Unesite ukupan iznos" required>
             </div>
 
             <button type="submit" class="btn btn-primary" name="save">Sačuvaj</button>

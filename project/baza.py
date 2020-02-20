@@ -434,20 +434,22 @@ def procitaj_podatke_racuna():
     con.close()
     return lista_racuna
 
-def sacuvaj_novi_racun(datum,osoba,tetovaza,ukupno):
+def sacuvaj_novi_racun(datum,osoba,tetovaze,ukupno):
     con=sqlite3.connect("tattoo.db")
+    ime =[]
     try:
         cur=con.cursor()
-        imena=osoba.split(" ")
-        ime=imena[0]
-        prezime=imena[1]
-        cur.execute("SELECT id FROM osoblje WHERE ime = ? AND prezime = ? ",(ime,prezime))
+        ime=osoba.split(" ")
+        imeo=ime[0]
+        prezimeo=ime[1]
+        cur.execute("SELECT id FROM osoblje WHERE ime = ? AND prezime = ? ",(imeo,prezimeo,))
         osoblje_id=cur.fetchone()
         osoblje_id=osoblje_id[0]
 
-        cur.execute("SELECT id FROM tetovaze WHERE naziv = ?",(tetovaza))
+        cur.execute("SELECT id FROM tetovaze WHERE naziv = ?",(tetovaze,))
         tetovaze_id=cur.fetchone()
         tetovaze_id=tetovaze_id[0]
+
         cur.execute("INSERT INTO racuni (datum,osoblje_id,tetovaze_id,ukupno) VALUES (?,?,?,?)",(datum,osoblje_id,tetovaze_id,ukupno))
         con.commit()
 
@@ -476,22 +478,19 @@ def izbrisi_racun(racuni_id):
 
 def dohvati_racun_po_id(racuni_id):
     con = sqlite3.connect("tattoo.db")
-    racuni = None
+    racuni = []
     try:
-        cur = con.cursor()
-        cur.execute("SELECT id, datum, osoblje_id, tetovaze_id, ukupno FROM racuni WHERE id=?", (racuni_id))
-        podaci = cur.fetchone()
+        cur=con.cursor()
+        cur.execute(""" SELECT * FROM tetovaze INNER JOIN racuni
+                        ON racuni.tetovaze_id = tetovaze.id INNER JOIN osoblje
+                        ON racuni.osoblje_id = osoblje.id 
+                        WHERE racuni.id = ?""",racuni_id)
+        
+        podaci=cur.fetchone()
+        racuni.append(Tetovaze(podaci[0],podaci[1],podaci[2],podaci[3],podaci[4],podaci[5]))
+        racuni.append(Racuni(podaci[6],podaci[7],podaci[8],podaci[9],podaci[10]))
+        racuni.append(Osoblje(podaci[11],podaci[12],podaci[13],podaci[14],podaci[15],podaci[16],podaci[17]))
 
-        # cur.execute("SELECT ime, prezime FROM osoblje WHERE id = ?",(podaci[2]))
-        # osoba=cur.fetchone()
-        # osoba=osoba[0]+" "+osoba[1]
-
-        # cur.execute("SELECT naziv FROM tetovaze WHERE id = ?",(podaci[3]))
-        # tetovaza=cur.fetchone()
-        # tetovaza=tetovaza[0]
-
-        print ("podaci", podaci)
-        racuni = Racuni(podaci[0], podaci[1], podaci[2], podaci[3], podaci[4])
 
         print("Uspjesno dohvacen racun iz baze podataka po ID-u")
 
@@ -502,7 +501,7 @@ def dohvati_racun_po_id(racuni_id):
     con.close()
     return racuni 
 
-def azuriraj_racun(racuni_id, datum, osoba, tetovaza, ukupno):
+def azuriraj_racun(racuni_id, datum, osoba, tetovaze, ukupno):
     con = sqlite3.connect("tattoo.db")
     try:
         cur = con.cursor()
@@ -513,7 +512,7 @@ def azuriraj_racun(racuni_id, datum, osoba, tetovaza, ukupno):
         osoblje_id=cur.fetchone()
         osoblje_id=osoblje_id[0]
 
-        cur.execute("SELECT id FROM tetovaze WHERE naziv = ?",(tetovaza))
+        cur.execute("SELECT id FROM tetovaze WHERE naziv = ?",(tetovaze))
         tetovaze_id=cur.fetchone()
         tetovaze_id=tetovaze_id[0]
         cur.execute("UPDATE racuni SET datum = ?, osoblje_id = ?, tetovaze_id = ?, ukupno = ? WHERE id = ?", (datum, osoblje_id, tetovaze_id, ukupno, racuni_id))
@@ -676,3 +675,13 @@ def sve_tetovaze():
         con.rollback()
     con.close()
     return listatetovaza
+
+# def dohvati_osoblje_po_imenu(osoba):
+#     con=sqlite3.connect('tattoo.db')
+#     id=0
+#     try:
+#         osoblje=osoba.split(" ")
+#         ime=osoblje[0]
+#         prezime=osoblje[1]
+
+#     return 

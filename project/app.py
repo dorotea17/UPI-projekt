@@ -216,9 +216,9 @@ def spremi_racun_():
 
     datum=request.forms.get("datum")
     osoba=request.forms.get("osoblje")
-    tetovaza=request.forms.get("tetovaza")
+    tetovaze=request.forms.get("tetovaze")
     ukupno=int(request.forms.get("ukupno"))
-    sacuvaj_novi_racun(datum,osoba,tetovaza,ukupno)
+    sacuvaj_novi_racun(datum,osoba,tetovaze,ukupno)
 
     redirect('/racuni')
 
@@ -235,10 +235,10 @@ def azuriraj_racun_save():
     racuni_id=request.forms.get("racuniid")
     datum=request.forms.get("datum")
     osoba=request.forms.get("osoblje")
-    tetovaza=request.forms.get("tetovaza")
+    tetovaze=request.forms.get("tetovaze")
     ukupno=int(request.forms.get("ukupno"))
 
-    azuriraj_racun(racuni_id,datum,osoba,tetovaza,ukupno)
+    azuriraj_racun(racuni_id,datum,osoba,tetovaze,ukupno)
     redirect('/racuni')
 
 @app.route('/izbrisi-racun')
