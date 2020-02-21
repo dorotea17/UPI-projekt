@@ -1,3 +1,4 @@
 1	2019-12-12	Ivana Konta	Zmaj	3000
-2	2020-01-01	Ivana Konta	Ptica	500
+2	2020-01-01	Dorotea Bertovic	Zmaj	500
 4	2019-12-17	Dorotea Bertovic	Ptica	700
+5	2020-01-01	Ivana Konta	Ptica	500

@@ -85,7 +85,7 @@
                 </div>
               </div>
               </th>
-          </tr>
+            </tr>
         </thead>
         <tbody style="background-color: white;">
 
@@ -96,6 +96,7 @@
               <td>{{item._velicina}}</td>
               <td>{{item._vrijeme}} min</td>
               <td>{{item._cijena}}</td>
+              <td></td>
             </tr>
 
             %end

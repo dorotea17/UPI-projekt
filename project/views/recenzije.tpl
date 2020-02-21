@@ -55,8 +55,7 @@
             <th scope="col">Naziv</th>
             <th scope="col">Cijena
             </th>
-            <th scope="col">Ocjena</th>
-            <th scope="col">Uredi ocjenu</th>
+            <th scope="col">Dodaj ocjenu</th>
           </tr>
         </thead>
         <tbody style="background-color: white;">
@@ -66,10 +65,9 @@
               <th scope="row"><img src="{{item._link}}" height="200px" width="200px"></th>
               <td>{{item._naziv}}</td>
               <td>{{item._cijena}}</td>
-              <td>{{item._ocjena}</td>
               <td>
-                <a href='/formarecenzije'>
-                  <i class="fas fa-edit"></i>
+                <a href='/upisrecenzije?tetovazeid={{item._id}}'>
+                  <i class="fas fa-plus"></i>
                 </a>
               </td>
             </tr>

@@ -48,16 +48,33 @@
       <h1 class="mt-5">Recenzija</h1>
     </div>
       <form style="width: 100%" action='{{form_akcija}}' method='POST'>
-        <div class="rating">
-            <input type="radio" name="star" id="star1"><label for="star1"></label>
-            <input type="radio" name="star" id="star2"><label for="star2"></label>
-            <input type="radio" name="star" id="star3"><label for="star3"></label>
-            <input type="radio" name="star" id="star4"><label for="star4"></label>
-            <input type="radio" name="star" id="star5"><label for="star5"></label>
+        <input type="hidden" class="form-control" id="tetovazeid" name='tetovazeid' value='{{data._id if data != None else ""}}'>
+        <!-- <div class="rating" id="stars">
+            <input type="radio" name="star" id="star1" value="1"><label for="star1"></label>
+            <input type="radio" name="star" id="star2" value="2"><label for="star2"></label>
+            <input type="radio" name="star" id="star3" value="3"><label for="star3"></label>
+            <input type="radio" name="star" id="star4" value="4"><label for="star4"></label>
+            <input type="radio" name="star" id="star5" value="5"><label for="star5"></label>
           </div>
-          <br><br><br><br><br><br>
-            <button type="submit" class="btn btn-primary" name="save">Sačuvaj</button>
+          <br><br><br><br><br><br> -->
+          <img src="{{data._link}}" height="200px" width="200px"><br><br>
+          <h3>Tetovaza: {{data._naziv}}</h3>
+          <h6>Cijena: {{data._cijena}}</h6><br>
 
+          <label for="ocjena">Recenzija</label><br>
+          <select class="selectpicker form-control" type="number" id="ocjena" name="ocjena" style="height: 40px;"></select>
+          <script>
+            var select = document.getElementById("ocjena");
+            
+            for(var i = 0; i < 5 ; i++) {
+              var el = document.createElement("option");
+              el.textContent = i+1;
+              el.value = i+1;
+              select.appendChild(el);
+            }
+          </script><br>
+            <button type="submit" class="btn btn-primary" name="save">Sačuvaj</button>
+          
         </form>     
 	</div>
     </div>

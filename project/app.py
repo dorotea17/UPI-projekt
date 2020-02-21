@@ -10,6 +10,7 @@ procitaj_podatke_tetovaze()
 procitaj_podatke_racuna()
 procitaj_podatke_osoblja()
 procitaj_podatke_korisnik()
+procitaj_recenzije()
 trenutnikorisnik=""
 trenutnoosoblje=""
 dirname = os.path.dirname(sys.argv[0])
@@ -49,12 +50,14 @@ def contact():
    
 @app.route('/tattoo')
 def tattoo():
-    podaci=procitaj_podatke_tetovaze()
-    return template('tattoo', data=podaci, template_lookup=[template_path])
+    if ( trenutnoosoblje != ""):
+        podaci=procitaj_podatke_tetovaze()
+        return template('tattoo', data=podaci, template_lookup=[template_path])
 
 @app.route('/nova-tattoo')
 def nova_tetovaza():
-    return template('formatattoo',data=None,form_akcija="/spremi-tattoo",template_lookup=[template_path])
+    if (trenutnoosoblje != ""):
+        return template('formatattoo',data=None,form_akcija="/spremi-tattoo",template_lookup=[template_path])
 
 @app.route('/spremi-tattoo', method='POST')
 def spremi_tattoo():
@@ -72,9 +75,10 @@ def spremi_tattoo():
 
 @app.route('/azuriraj-tattoo')
 def azuriraj_tattoo():
-    tetovaze_id=request.query['tetovazeid']
-    tetovaze=dohvati_tetovazu_po_id(tetovaze_id)
-    return template('formatattoo',data=tetovaze, form_akcija="/azuriraj-tattoo-save",template_lookup=[template_path])
+    if (trenutnoosoblje != ""):
+        tetovaze_id=request.query['tetovazeid']
+        tetovaze=dohvati_tetovazu_po_id(tetovaze_id)
+        return template('formatattoo',data=tetovaze, form_akcija="/azuriraj-tattoo-save",template_lookup=[template_path])
 
 @app.route('/azuriraj-tattoo-save',method='POST')
 def azuriraj_tattoo_save():
@@ -153,12 +157,14 @@ def dodajkorisnika():
 
 @app.route('/osoblje')
 def osoblje():
-    podaci=procitaj_podatke_osoblja()
-    return template('osoblje', data=podaci, template_lookup=[template_path])
+    if (trenutnoosoblje != ""):
+        podaci=procitaj_podatke_osoblja()
+        return template('osoblje', data=podaci, template_lookup=[template_path])
 
 @app.route('/novo-osoblje')
 def novo_osoblje():
-    return template('formaosoblje',data=None,form_akcija="/spremi-osoblje",template_lookup=[template_path])
+    if (trenutnoosoblje != ""):
+        return template('formaosoblje',data=None,form_akcija="/spremi-osoblje",template_lookup=[template_path])
 
 @app.route('/spremi-osoblje', method='POST')
 def spremi_osoblje():
@@ -175,9 +181,10 @@ def spremi_osoblje():
 
 @app.route('/azuriraj-osoblje')
 def azuriraj_osoblje_():
-    osoblje_id=request.query['osobljeid']
-    osoblje=dohvati_osoblje_po_id(osoblje_id)
-    return template('formaosoblje',data=osoblje, form_akcija="/azuriraj-osoblje-save",template_lookup=[template_path])
+    if (trenutnoosoblje != ""):
+        osoblje_id=request.query['osobljeid']
+        osoblje=dohvati_osoblje_po_id(osoblje_id)
+        return template('formaosoblje',data=osoblje, form_akcija="/azuriraj-osoblje-save",template_lookup=[template_path])
 
 @app.route('/azuriraj-osoblje-save',method='POST')
 def azuriraj_osoblje_save():
@@ -259,15 +266,6 @@ def velika_tetovaza_():
 def mala_tetovaza_():
     podaci=mala_tetovaza()
     return template('tetovaze',data=podaci,template_lookup=[template_path])
-        
-@app.route('/recenzije')
-def recenzije_():
-    podaci=procitaj_podatke_tetovaze()
-    return template('recenzije', data=podaci, template_lookup=[template_path])
-
-@app.route('/formarecenzije')
-def formarecenzije():
-    podaci=procitaj_recenzije
 
 @app.route('/odmanje')
 def od_manje():
@@ -279,9 +277,27 @@ def od_vece():
     podaci=odvece()
     return template('tetovaze',data=podaci,template_lookup=[template_path])
 
-@app.route('/formarecenzije')
+@app.route('/upisrecenzije')
 def urediocjenu():
-    return template("formarecenzije",data=None,template_lookup=[template_path])
+    if (trenutnikorisnik != ""):
+        tetovaze_id=request.query['tetovazeid']
+        podaci=dohvati_tetovazu_po_id(tetovaze_id)
+        return template("formarecenzije",data=podaci,form_akcija="/spremirecenziju",template_lookup=[template_path])
+
+@app.route('/recenzije')
+def recenzije_():
+    if (trenutnikorisnik != ""):
+        podaci=procitaj_podatke_tetovaze()
+        return template('recenzije', data=podaci, template_lookup=[template_path])
+
+@app.route('/spremirecenziju',method='POST')
+def spremirecenziju():
+    korisnik_id=dohvati_korisnika_po_emailu(trenutnikorisnik)
+    print("Korisnikov id: ",korisnik_id)
+    tetovaze_id=request.forms.get("tetovazeid")
+    ocjena=int(request.forms.get("ocjena"))
+    spremi_recenziju(ocjena,tetovaze_id,korisnik_id)
+    redirect("/recenzije")
 
 @app.route('/odjava')
 def odjava():

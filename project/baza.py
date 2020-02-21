@@ -155,6 +155,20 @@ def procitaj_recenzije():
         con.rollback()
     con.close()
 
+def spremi_recenziju(ocjena,tetovaze_id,korisnik_id):
+    con=sqlite3.connect("tattoo.db")
+    try:
+        cur=con.cursor()
+        cur.execute("INSERT INTO recenzije (ocjena,tetovaze_id,korisnik_id) VALUES (?,?,?)",(ocjena,tetovaze_id,korisnik_id))
+        con.commit()
+
+        print("Uspjesno dodana nova tetovaza u bazu podataka")
+    
+    except Exception as e:
+        print("Dogodila se greska pri dodavanju nove tetovaze u bazu podataka: ",e)
+        con.rollback()
+    con.close()
+
 def procitaj_podatke_tetovaze():
     con=sqlite3.connect("tattoo.db")
     lista_tetovaza=[]
@@ -619,6 +633,19 @@ def sacuvaj_korisnika(e_mail,lozinka):
         con.rollback()
 
     con.close()
+
+def dohvati_korisnika_po_emailu(korisnik):
+    con=sqlite3.connect('tattoo.db')
+    try:
+        cur=con.cursor()
+        cur.execute("SELECT * FROM korisnik WHERE e_mail = ?",(korisnik,))
+        kor=cur.fetchone()
+        kor=kor[0]
+    except Exception as e:
+        print("Dogodila se greska kod dohvacanja korisnika: ",e)
+        con.rollback()
+    con.close()
+    return kor
 
 def svo_osoblje():
     con=sqlite3.connect('tattoo.db')
