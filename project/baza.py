@@ -663,3 +663,4 @@ def dohvati_osoblje_po_imenu(osoba):
         con.rollback()
     con.close()
     return osoblje
+

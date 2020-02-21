@@ -47,8 +47,8 @@
     <div class="col-lg-12 text-center">
       <h1 class="mt-5">Recenzija</h1>
     </div>
-        <form style="width: 100%">
-          <div class="rating">
+      <form style="width: 100%" action='{{form_akcija}}' method='POST'>
+        <div class="rating">
             <input type="radio" name="star" id="star1"><label for="star1"></label>
             <input type="radio" name="star" id="star2"><label for="star2"></label>
             <input type="radio" name="star" id="star3"><label for="star3"></label>
