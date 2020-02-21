@@ -60,10 +60,10 @@
             </div>
 
             <label for="osoblje">Osoblje</label><br>
-            <select class="selectpicker form-control" type="text" id="osoblje" name="osoblje" style="height: 40px;" required></select>
+            <select class="selectpicker form-control" type="text" id="osoblje" name="osoblje" style="height: 40px;"></select>
             <script>
               var select = document.getElementById("osoblje");
-              var options = {{!podaciO}}
+              var options = {{!podaciO}} 
             
               for(var i = 0; i < options.length; i++) {
                 var opt = options[i];

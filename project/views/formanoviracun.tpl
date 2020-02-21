@@ -34,7 +34,7 @@
             <div class="dropdown-menu">
               <a class="dropdown-item" href="/tattoo">Tetovaže</a>
               <a class="dropdown-item" href="/osoblje">Osoblje</a>
-              <a class="dropdown-item active" href="/racuni">Računi<span class="sr-only">(current)</span></a>
+              <a class="dropdown-item active" href="/racuni">Računi<span class="sr-only">(current)</a>
             </div>
           </li>
           <li class="nav-item">
@@ -49,55 +49,44 @@
 
   <!-- Page Content -->
   <div class="container">
-    <div class="row" style="padding:25px 0;">
-      <div class="col-md-2 text-center" style="padding: 0">
-        <a href='/novi-racun' class="btn btn-secondary">Dodaj novi racun</a>
-      </div>
-    </div>
-    <div class="row">
-      <table class="table" style="background-color: white;">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Datum</th>  
-            <th scope="col">Osoblje</th>
-            <th scope="col">Tetovaže</th>
-            <th scope="col">Ukupno</th>
-            <th scope="col">Uredi</th>
-            <th scope="col">Izbriši</th>
-          </tr>
-        </thead>
-        <tbody style="background-color: white;">
+	<div class="row" style="margin-top: 50px;">
+        <form style="width: 100%" action='{{form_akcija}}' method='POST'>
 
-            %for item in data:
-            <tr>
-              <th scope="row">{{item[1]._id}}</th>
-              <td>{{item[1]._datum}}</td>
-              <td>{{item[2]._ime_prezime}}</td>
-              <td>{{item[0]._naziv}}</td>
-              <td>{{item[1]._ukupno}}</td>
-              <td>
-                <a href='/azuriraj-racun?racuniid={{item[1]._id}}'>
-                  <i class="fas fa-edit"></i>
-                </a>
-              </td>
-              <td>
-                <a href='/izbrisi-racun?racuniid={{item[1]._id}}'>
-                  <i class="fas fa-trash-alt"></i>
-                </a>
-              </td>
-            </tr>
+            <input type="hidden" class="form-control" id="racuniid" name='racuniid'>
 
-            %end
-        </tbody>
-      </table>
+            <div class="form-group">
+                <label for="datum">Datum</label>
+                <input type="date" class="form-control" id="datum" name='datum' aria-describedby="datum-help" placeholder="Unesite datum" required>
+            </div>
+
+            <div class="form-group">
+                <label for="osoblje">Osoblje</label>
+                <input type="text" class="form-control" id="osoblje" name='osoblje' value='{{data}}' aria-describedby="datum-help">
+            </div>
+            
+            <label for="tetovaze">Tetovaža</label><br>
+            <select class="selectpicker form-control" type="text" id="tetovaze" name="tetovaze" style="height: 40px;"></select>
+            <script>
+              var select = document.getElementById("tetovaze");
+              var options = {{!podaciT}}
+              
+              for(var i = 0; i < options.length; i++) {
+                var opt = options[i];
+                var el = document.createElement("option");
+                el.textContent = opt;
+                el.value = opt;
+                select.appendChild(el);
+              }
+            </script><br>
+            <div class="form-group">
+                <label for="ukupno">Ukupno</label>
+                <input type="number" class="form-control" id="ukupno" name='ukupno' aria-describedby="ukupno-help" placeholder="Unesite ukupan iznos" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary" name="save">Sačuvaj</button>
+
+        </form>     
     </div>
-    <a href='/ispisracuna' class="btn btn-secondary">Ispis racuna</a>
-  </div>
-  
-	<script>
-		//example of calling custom function
-		helloWorld();
-	</script>
+
 </body>
 </html>

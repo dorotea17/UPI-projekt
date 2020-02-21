@@ -78,7 +78,7 @@ def unesi_demo_podatke():
         print("Uspjesno kreirana tablica osoblje")
 
         cur.execute("INSERT INTO osoblje (ime_prezime,datumpocetkarada,brojtetovazaizradenih,e_mail,lozinka) VALUES (?,?,?,?,?)",("Ivana Konta","2020-01-01",4,"ikonta@pmfst.hr","ikonta"))
-        cur.execute("INSERT INTO osoblje (ime_prezime,datumpocetkarada,brojtetovazaizradenih,e_mail,lozinka) VALUES (?,?,?,?,?)",("Dorotea Bertović","2019-12-07",7,"dbertovic@pmfst.hr","dbertovic"))
+        cur.execute("INSERT INTO osoblje (ime_prezime,datumpocetkarada,brojtetovazaizradenih,e_mail,lozinka) VALUES (?,?,?,?,?)",("Dorotea Bertovic","2019-12-07",7,"dbertovic@pmfst.hr","dbertovic"))
         con.commit()
 
         print("Uspjesno uneseni testni podaci u tablicu osoblje")
@@ -434,11 +434,9 @@ def procitaj_podatke_racuna():
 
 def sacuvaj_novi_racun(datum,osoblje,tetovaze,ukupno):
     con=sqlite3.connect("tattoo.db")
-    osoba=""
     try:
         cur=con.cursor()
-        osoba=osoblje
-        cur.execute("SELECT id FROM osoblje WHERE ime_prezime = ?",(osoba,))
+        cur.execute("SELECT id FROM osoblje WHERE ime_prezime = ?",(osoblje,))
         osoblje_id=cur.fetchone()
         osoblje_id=osoblje_id[0]
 
@@ -652,12 +650,16 @@ def sve_tetovaze():
     con.close()
     return listatetovaza
 
-# def dohvati_osoblje_po_imenu(osoba):
-#     con=sqlite3.connect('tattoo.db')
-#     id=0
-#     try:
-#         osoblje=osoba.split(" ")
-#         ime=osoblje[0]
-#         prezime=osoblje[1]
-
-#     return 
+def dohvati_osoblje_po_imenu(osoba):
+    con=sqlite3.connect('tattoo.db')
+    osoblje=[]
+    try:
+        cur=con.cursor()
+        cur.execute("SELECT * FROM osoblje WHERE ime_prezime = ?",(osoba,))
+        osoblje=cur.fetchone()
+        osoblje=osoblje[1]
+    except Exception as e:
+        print("Dogodila se greska kod dohvacanja osoblja: ",e)
+        con.rollback()
+    con.close()
+    return osoblje

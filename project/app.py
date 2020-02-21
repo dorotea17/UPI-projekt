@@ -5,7 +5,7 @@ import os, sys
 
 from baza import *
 
-unesi_demo_podatke()
+# unesi_demo_podatke()
 procitaj_podatke_tetovaze()
 procitaj_podatke_racuna()
 procitaj_podatke_osoblja()
@@ -204,17 +204,17 @@ def racuni():
 
 @app.route('/novi-racun')
 def novi_racun():
-    listaosoblja = svo_osoblje()
+    korisnik = trenutnoosoblje
     listatetovaza = sve_tetovaze()
-    return template('formaracuni',data=None, podaciO=listaosoblja, podaciT=listatetovaza,form_akcija="/spremi-racun",template_lookup=[template_path])
+    return template('formanoviracun',data=korisnik, podaciT=listatetovaza,form_akcija="/spremi-racun",template_lookup=[template_path])
 
 @app.route('/spremi-racun', method='POST')
 def spremi_racun_():
     postdata=request.body.read()
 
     datum=request.forms.get("datum")
-    osoblje=request.forms.get("osoblje")
     tetovaze=request.forms.get("tetovaze")
+    osoblje=request.forms.get("osoblje")
     ukupno=int(request.forms.get("ukupno"))
     sacuvaj_novi_racun(datum,osoblje,tetovaze,ukupno)
 
@@ -289,5 +289,19 @@ def odjava():
     trenutnikorisnik=""
     trenutnoosoblje=""
     redirect('/')
+
+@app.route("/ispisracuna")
+def ispis_racuna():
+    racuni=procitaj_podatke_racuna()
+    file =open("racuni_ispis.txt","w")
+    for racun in racuni:
+        file.write(str(racun[1]._id)+"\t")
+        file.write(str(racun[1]._datum)+"\t")
+        file.write(racun[2]._ime_prezime+"\t")
+        file.write(racun[0]._naziv+"\t")
+        file.write(str(racun[1]._ukupno)+"\n")
+
+    file.close()
+    redirect("/racuni")
 
 run(app, host='localhost', port = 1212)
